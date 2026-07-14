@@ -34,5 +34,9 @@ docs/
 | unitree-go1 | [feet](cards/unitree-go1/feet/) | sensor | ANY | ✅ 已验收 2026-07-14 | luoye-hcl |
 | unitree-go1 | [imu](cards/unitree-go1/imu/) | sensor | ANY | ✅ 已验收 2026-07-14 | luoye-hcl |
 | unitree-go1 | [loco_state](cards/unitree-go1/loco_state/) | sensor | HIGHLEVEL | ✅ 已验收 2026-07-14 | luoye-hcl |
+| unitree-go1 | [fall_alarm](cards/unitree-go1/fall_alarm/) | sensor | ANY | 🟢 离线绿 · 实机只读已验 2026-07-13 | luoye-hcl |
+| unitree-go1 | [net](cards/unitree-go1/net/) | sensor | ANY | 🟢 离线绿 · 实机只读已验 2026-07-13 | luoye-hcl |
+| unitree-go1 | [odometry](cards/unitree-go1/odometry/) | sensor | HIGHLEVEL | 🟢 离线绿 · 实机只读已验 2026-07-13 | luoye-hcl |
 
+> 状态图例:✅ `accepted`(实机验收通过,有完整真实样本)· 🟢 `offline-green`(离线测试全绿;实机只读已验证,完整样本待采后升 accepted)· 📝 `draft`(仅设计)。
 > 收录一张卡后,请在此表加一行。

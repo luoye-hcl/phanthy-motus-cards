@@ -1,0 +1,37 @@
+{
+  "card": "net",
+  "robot": "unitree-go1",
+  "author": "luoye-hcl",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "offline-green",
+  "verified_readonly_date": "2026-07-13",
+  "topic": "state/net",
+  "rate_hz": 0.5,
+  "payload_fields": {
+    "available": "本卡是否可用(恒 true,系统读)",
+    "hostname": "主机名",
+    "ipv4": "主用出口网卡 IPv4",
+    "wifi.available": "是否读到活动无线网卡",
+    "wifi.iface": "无线网卡名(如 wlan0)",
+    "wifi.link_quality": "链路质量(/proc/net/wireless 第 3 列)",
+    "wifi.signal_dbm": "信号电平 (dBm)",
+    "timestamp_ms": "采集时间戳 (ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "net",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Go1 网络健康 —— 主机名/IPv4/Wi-Fi 信号强度(联调掉线排查用)。",
+    "inputSchema": { "type": "object", "properties": {} },
+    "topic_out": [ { "topic": "/{ns}/state/net", "format": "data/json" } ]
+  },
+  "source": {
+    "repo": "luoye-hcl/go1-driver",
+    "path": "unitree/go1/plugins/mt_state.py",
+    "class": "NetCard"
+  }
+}
