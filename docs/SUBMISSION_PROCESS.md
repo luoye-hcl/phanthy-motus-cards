@@ -1,11 +1,12 @@
 # 提交流程(SUBMISSION PROCESS)
 
-本库用 **PR + 审核**。任何人(同事/我)提交或更新卡片,都走下面的流程。
+本库用 **PR + 审核**。提交或更新卡片,统一走下面的流程。
 
 ## 前置(一次性)
 
-- 让仓库管理员(luoye-hcl)把你加为 **collaborator**(私有库)。
-- 本机 `git clone git@github.com:luoye-hcl/phanthy-motus-cards.git`(或 https)。
+- 克隆仓库:`git clone https://github.com/luoye-hcl/phanthy-motus-cards.git`。
+  - 有写权限:直接开分支提 PR(见下)。
+  - 无写权限:先 Fork 到自己名下,再从 Fork 提 PR。
 - 读 [SUBMISSION_STANDARD.md](SUBMISSION_STANDARD.md)。
 
 ## A. 新增一张卡
