@@ -1,0 +1,34 @@
+{
+  "card": "feet",
+  "robot": "unitree-go1",
+  "author": "luoye-hcl",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "accepted",
+  "accepted_date": "2026-07-14",
+  "topic": "state/feet",
+  "rate_hz": 10.0,
+  "payload_fields": {
+    "order": "四足顺序,固定 [FR,FL,RR,RL]",
+    "foot_force_raw": "四足足底力原始值(原始计数,与 order 对应)",
+    "position_to_body": "各足相对机身位置 {x,y,z}(m,仅高层态)",
+    "speed_to_body": "各足相对机身速度 {x,y,z}(m/s,仅高层态)",
+    "timestamp_ms": "采集时间戳(ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "feet",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Go1 足端 —— 足底力原始值(高层控制时另有足端相对机身的位置/速度)。",
+    "inputSchema": { "type": "object", "properties": {} },
+    "topic_out": [ { "topic": "/{ns}/state/feet", "format": "data/json" } ]
+  },
+  "source": {
+    "repo": "luoye-hcl/go1-driver",
+    "path": "unitree/go1/plugins/mt_state.py",
+    "class": "FeetCard"
+  }
+}

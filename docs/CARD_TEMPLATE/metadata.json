@@ -1,0 +1,29 @@
+{
+  "card": "<card_name>",
+  "robot": "<vendor-model>",
+  "author": "<github-id>",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "<relative/topic>",
+  "rate_hz": 10.0,
+  "payload_fields": {
+    "<field>": "<含义/单位>"
+  },
+  "mcp_tool": {
+    "name": "<card_name>",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "<一句话>",
+    "inputSchema": { "type": "object", "properties": {} },
+    "topic_out": [ { "topic": "/{ns}/<relative/topic>", "format": "data/json" } ]
+  },
+  "source": {
+    "repo": "<owner/repo>",
+    "path": "<path/to/file.py>",
+    "class": "<ClassName>",
+    "commit": "<optional-commit-sha>"
+  }
+}

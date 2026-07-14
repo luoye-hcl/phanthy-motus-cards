@@ -1,0 +1,40 @@
+{
+  "card": "loco_state",
+  "robot": "unitree-go1",
+  "author": "luoye-hcl",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "accepted",
+  "accepted_date": "2026-07-14",
+  "topic": "loco/state",
+  "rate_hz": 10.0,
+  "payload_fields": {
+    "mode": "运动模式码",
+    "mode_name": "模式名(idle/force_stand/walk/damp…)",
+    "gait_type": "步态码",
+    "gait_name": "步态名",
+    "foot_raise_height_m": "抬脚高度 (m)",
+    "position_m": "机身里程位置 [x,y,z] (m)",
+    "body_height_m": "机身高度 (m)",
+    "velocity_body_mps": "机身系速度 {forward,lateral} (m/s)",
+    "velocity_index_2_raw": "官方 velocity[2] 原始值(不命名)",
+    "yaw_speed_rad_s": "偏航角速度 (rad/s)",
+    "timestamp_ms": "采集时间戳 (ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "loco_state",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Go1 运动状态 —— 模式/步态/里程/速度/机身高度。10Hz。",
+    "inputSchema": { "type": "object", "properties": {} },
+    "topic_out": [ { "topic": "/{ns}/loco/state", "format": "data/json" } ]
+  },
+  "source": {
+    "repo": "luoye-hcl/go1-driver",
+    "path": "unitree/go1/plugins/mt_state.py",
+    "class": "LocoStateCard"
+  }
+}

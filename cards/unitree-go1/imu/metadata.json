@@ -1,0 +1,36 @@
+{
+  "card": "imu",
+  "robot": "unitree-go1",
+  "author": "luoye-hcl",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "accepted",
+  "accepted_date": "2026-07-14",
+  "topic": "state/imu",
+  "rate_hz": 20.0,
+  "payload_fields": {
+    "quaternion_wxyz": "姿态四元数 [w,x,y,z]",
+    "gyroscope_rad_s": "三轴角速度 [x,y,z] (rad/s)",
+    "accelerometer_m_s2": "三轴加速度 [x,y,z] (m/s^2,静止 z≈9.8)",
+    "rpy_rad": "欧拉角 [roll,pitch,yaw] (rad)",
+    "temperature_c": "IMU 温度 (℃)",
+    "attitude_may_drift": "姿态漂移提示 (bool)",
+    "timestamp_ms": "采集时间戳 (ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "imu",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Go1 IMU —— 四元数(wxyz)/角速度/加速度/欧拉角/温度。20Hz。",
+    "inputSchema": { "type": "object", "properties": {} },
+    "topic_out": [ { "topic": "/{ns}/state/imu", "format": "data/json" } ]
+  },
+  "source": {
+    "repo": "luoye-hcl/go1-driver",
+    "path": "unitree/go1/plugins/mt_state.py",
+    "class": "ImuCard"
+  }
+}
