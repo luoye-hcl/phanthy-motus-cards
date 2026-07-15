@@ -36,3 +36,4 @@ docs/
 | unitree-go1 | [loco_state](cards/unitree-go1/loco_state/) | sensor | HIGHLEVEL | ✅ 已验收 2026-07-14 | luoye-hcl |
 
 > 收录一张卡后,请在此表加一行。
+> **入库门槛**:只有 `accepted`(网站验证 + MT 验收通过)的卡才合入 main;`offline-green` 卡的 PR 可开着(标 `[pending-web]`)但不合并。见 [docs/WEBSITE_VERIFICATION.md](docs/WEBSITE_VERIFICATION.md)。

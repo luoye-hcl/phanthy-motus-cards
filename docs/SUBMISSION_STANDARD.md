@@ -39,6 +39,7 @@
 
 - **离线**:测试通过证据(测试文件名 + 结果摘要,如 `test_mt_cards.py ... OK`)。
 - **实机(若 status=accepted)**:一段**真实返回数据样本**(JSON)+ 采集时间/环境;`accepted.md` 注明验收人/日期/页面呈现是否正常。
+- **accepted 卡另必须**:①网站验证证据(卡可见截图 + 数据流/执行效果截图,用链接不入库二进制)②MT 验收记录(人/日期/结论)③完整真实 JSON 样本。按 `docs/CARD_TEMPLATE/verification/accepted.md` 填。详见 [WEBSITE_VERIFICATION.md](WEBSITE_VERIFICATION.md)。
 
 ## 6. `CHANGELOG.md`
 
@@ -50,6 +51,16 @@
 - 无与本卡无关的大文件/二进制。
 - 中文或英文皆可,但同一张卡内保持一致。
 
+## 8. 状态与入库门槛
+
+| 状态 | 含义 | 能合入 main? |
+|---|---|---|
+| `draft` | 仅设计,未实现/未测 | ❌ |
+| `offline-green` | 离线测试全绿(可含实机只读碎片) | ❌ 只能待分支/开着的 PR(标题加 `[pending-web]`) |
+| `accepted` | 网站验证通过 + MT 验收通过 + 完整真实样本 + 证据齐 | ✅ 唯一可合 |
+
+**只有 `accepted` 能合入 main。** 升 accepted 的完整流程见 [WEBSITE_VERIFICATION.md](WEBSITE_VERIFICATION.md):跑 `tools/preflight.py` → 网站看得到/点执行/看数据流 → 留证 → MT 验收。
+
 ## 提交标准自检清单(PR 里逐项打勾)
 
 - [ ] 目录 = `cards/<机器人>/<卡片名>/`,卡片名 = MCP 工具名 snake_case
@@ -59,3 +70,5 @@
 - [ ] `verification/` 有离线证据;accepted 卡有实机真实数据样本
 - [ ] `CHANGELOG.md` 有本次版本条目,`version` 已递增
 - [ ] 无明文口令/密钥/无关大文件
+- [ ] `tools/preflight.py <卡目录> --host <ip>` 全绿(机器判的契约+真数据)
+- [ ] accepted 卡:网站验证证据 + MT 验收记录齐(见 WEBSITE_VERIFICATION.md)
