@@ -1,0 +1,54 @@
+{
+  "card": "remote",
+  "robot": "tianyi-pro2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.1.0",
+  "status": "draft",
+  "topic": "state/remote",
+  "rate_hz": 43.3,
+  "payload_fields": {
+    "key_event.new": "按键事件新值(0-20,见KEY_*常量)",
+    "key_event.old": "按键事件旧值(0-20)",
+    "buttons.a": "A键键值(-1松开/1按下)",
+    "buttons.b": "B键键值(-1松开/1按下)",
+    "buttons.c": "C键键值(-1松开/1按下)",
+    "buttons.d": "D键键值(-1松开/1按下)",
+    "buttons.e": "E键键值(<-0.5上拨/-0.5~0.5中/>0.5下拨)",
+    "buttons.f": "F键键值(<-0.5上拨/-0.5~0.5中/>0.5下拨)",
+    "buttons.g": "G键键值(<-0.5左拨/-0.5~0.5中/>0.5右拨)",
+    "buttons.h": "H键键值(<-0.5右拨/-0.5~0.5中/>0.5左拨)",
+    "sticks.x1": "左摇杆X方向(左右,-1.0~1.0)",
+    "sticks.y1": "左摇杆Y方向(上下,-1.0~1.0)",
+    "sticks.x2": "右摇杆X方向(左右,-1.0~1.0)",
+    "sticks.y2": "右摇杆Y方向(上下,-1.0~1.0)",
+    "joy.axes": "/sbus_data(Joy)12轴值数组,索引0-11,范围-1.0~1.0(包含拨片/摇杆映射)",
+    "joy.buttons": "/sbus_data(Joy)按键数组(实机观察为空数组,按键事件走 /sbus_data/event)",
+    "timestamp_ms": "聚合输出时间戳(ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "remote",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "天轶2.0 Pro 遥控器SBUS事件与摇杆数据(8按键+双摇杆四轴,43.3Hz)。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/state/remote",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "<待建 tianyi-pro2-driver>",
+    "path": "plugins/remote.py",
+    "class": "RemoteStatePlugin",
+    "commit": null
+  }
+}

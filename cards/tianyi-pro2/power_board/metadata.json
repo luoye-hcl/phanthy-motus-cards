@@ -1,0 +1,66 @@
+{
+  "card": "power_board",
+  "robot": "tianyi-pro2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.1.0",
+  "status": "draft",
+  "topic": "state/power_board",
+  "rate_hz": 1.0,
+  "payload_fields": {
+    "temp.waist": "腰部MOS温度(°C)",
+    "temp.arm_a": "臂A MOS温度(°C)",
+    "temp.arm_b": "臂B MOS温度(°C)",
+    "temp.leg_a": "腿A MOS温度(°C)",
+    "temp.leg_b": "腿B MOS温度(°C)",
+    "temp.max.*": "各部位MOS温度最大值(°C)",
+    "temp.min.*": "各部位MOS温度最小值(°C)",
+    "current.arm_a": "臂A电流(A)",
+    "current.arm_b": "臂B电流(A)",
+    "current.leg_a": "腿A电流(A)",
+    "current.leg_b": "腿B电流(A)",
+    "current.waist": "腰部电流(A)",
+    "current.head": "头部电流(A)",
+    "current.max.*": "各支路电流最大值(A)",
+    "current.min.*": "各支路电流最小值(A)",
+    "voltage.arm_a": "臂A电压(V)",
+    "voltage.arm_b": "臂B电压(V)",
+    "voltage.leg_a": "腿A电压(V)",
+    "voltage.leg_b": "腿B电压(V)",
+    "voltage.waist": "腰部电压(V)",
+    "voltage.bus": "母线电压(V)",
+    "voltage.max.*": "各支路电压最大值(V)",
+    "voltage.min.*": "各支路电压最小值(V)",
+    "version.software": "软件版本",
+    "version.hardware": "硬件版本",
+    "battery.voltage": "电池电压(V)",
+    "battery.current": "电池电流(A)",
+    "battery.power": "电池电量(%)",
+    "timestamp_ms": "聚合输出时间戳(ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "power_board",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "天轶2.0 Pro 电源板状态(1Hz,各部位MOS温度/电流/电压含极值,母线电压,软硬版本,电池汇总)。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/state/power_board",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "<待建 tianyi-pro2-driver>",
+    "path": "plugins/power_board.py",
+    "class": "PowerBoardStatePlugin",
+    "commit": null
+  }
+}

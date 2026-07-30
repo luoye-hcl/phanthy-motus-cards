@@ -1,0 +1,52 @@
+{
+  "card": "battery",
+  "robot": "tianyi-pro2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.1.0",
+  "status": "draft",
+  "topic": "state/battery",
+  "rate_hz": 1.0,
+  "payload_fields": {
+    "installed": "电池安装状态(0x00无/0x01小/0x02大/0x03都有)",
+    "working": "工作中电池(0x10大/0x01小)",
+    "master.voltage": "主电池电压(V)",
+    "master.current": "主电池电流(A,负=放电,正=充电)",
+    "master.power": "主电池电量(%)",
+    "little.voltage": "小电池电压(V)",
+    "little.current": "小电池电流(A,负=放电,正=充电)",
+    "little.power": "小电池电量(%)",
+    "pg.12a": "电源板pg12a状态(0低/1高)",
+    "pg.12b": "电源板pg12b状态(0低/1高)",
+    "pg.12c": "电源板pg12c状态(0低/1高)",
+    "pg.12d": "电源板pg12d状态(0低/1高)",
+    "pg.5cd": "电源板pg5cd状态(0低/1高)",
+    "pg.5ab": "电源板pg5ab状态(0低/1高)",
+    "timestamp_ms": "聚合输出时间戳(ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "battery",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "天轶2.0 Pro 电池状态(1Hz,大小电池电压/电流/电量,充放电方向)。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/state/battery",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "<待建 tianyi-pro2-driver>",
+    "path": "plugins/battery.py",
+    "class": "BatteryStatePlugin",
+    "commit": null
+  }
+}

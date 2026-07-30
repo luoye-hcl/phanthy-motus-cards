@@ -1,0 +1,63 @@
+{
+  "card": "motor",
+  "robot": "tianyi-pro2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.1.0",
+  "status": "draft",
+  "topic": "state/motor",
+  "rate_hz": null,
+  "rate_hz_note": "四路 topic 频率不同:head=400Hz, waist=500Hz, arm=500Hz, leg=500Hz(2026-07-28 实测)",
+  "payload_fields": {
+    "parts.head[].name": "头部关节ID(1=Roll,2=Pitch,3=Yaw)",
+    "parts.head[].pos": "关节位置(rad)",
+    "parts.head[].speed": "关节速度(rad/s)",
+    "parts.head[].current": "关节电流(A)",
+    "parts.head[].temperature": "MOS温度(℃)",
+    "parts.head[].error": "错误码(33072掉线/33073超限/1过温/2过流/3低压/4MOS过温/5堵转/6高压/7缺相/8编码器错误)",
+    "parts.waist[].name": "腰部关节ID(31=Waist Yaw,32=Waist Pitch)",
+    "parts.waist[].pos": "关节位置(rad)",
+    "parts.waist[].speed": "关节速度(rad/s)",
+    "parts.waist[].current": "关节电流(A)",
+    "parts.waist[].temperature": "MOS温度(℃)",
+    "parts.waist[].error": "错误码(同 head)",
+    "parts.arm[].name": "双臂关节ID(左臂11-17,右臂21-27)",
+    "parts.arm[].pos": "关节位置(rad)",
+    "parts.arm[].speed": "关节速度(rad/s)",
+    "parts.arm[].current": "关节电流(A)",
+    "parts.arm[].temperature": "MOS温度(℃)",
+    "parts.arm[].error": "错误码(同 head)",
+    "parts.leg[].name": "腿部关节ID(51=Hip Pitch,52=Knee pitch)",
+    "parts.leg[].pos": "关节位置(rad)",
+    "parts.leg[].speed": "关节速度(rad/s)",
+    "parts.leg[].current": "关节电流(A)",
+    "parts.leg[].temperature": "MOS温度(℃)",
+    "parts.leg[].error": "错误码(同 head)",
+    "timestamp_ms": "聚合输出时间戳(ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "motor",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "天轶2.0 Pro 全身21电机状态(头部3+左臂7+右臂7+腰2+腿2):位置/速度/电流/温度/错误,按部位聚合。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/state/motor",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "<待建 tianyi-pro2-driver>",
+    "path": "plugins/motor.py",
+    "class": "MotorStatePlugin",
+    "commit": null
+  }
+}
