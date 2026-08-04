@@ -1,0 +1,45 @@
+{
+  "card": "voice",
+  "robot": "tianyi-pro2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "3.0.0",
+  "status": "draft",
+  "topic": "asr/text",
+  "rate_hz": null,
+  "payload_fields": {
+    "state": "状态(固定 active)",
+    "keyword": "唤醒关键词(lyre AsrKeyword.keyword)",
+    "angle": "声源方位角(°),0=正前, 正值=右, 负值=左 —— 具体刻度语义待真机标定",
+    "iat_id": "语音识别 ID(lyre AsrIat.id),去重键",
+    "iat_text": "语音识别结果文本(lyre AsrIat.text)",
+    "event": "ASR 事件值(lyre AsrEvent.event)",
+    "event_name": "ASR 事件名(优先取 payload 自带,回退 _ASR_EVENT_NAMES 表)",
+    "event_label": "ASR 事件中文标签",
+    "timestamp_ms": "毫秒级 Unix 时间戳"
+  },
+  "mcp_tool": {
+    "name": "voice",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "天轶2.0 语音识别状态(lyre ASR) — 订阅 phanthy_bus_bridge 聚合的 /state/voice,解析 asr 子对象,iat_id 去重后转发到 /{ns}/asr/text。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "asr/text",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "x-humanoid/tianyi2.0/device.py",
+    "class": "AsrPlugin",
+    "commit": "090a3e0"
+  }
+}
