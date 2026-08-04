@@ -1,0 +1,90 @@
+{
+  "card": "force_event",
+  "robot": "tianyi-pro2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "state/force_event",
+  "rate_hz": 0,
+  "payload_fields": {
+    "state": "心跳字段: monitoring",
+    "threshold_n": "心跳字段: 合力增量阈值(N), 默认 3.0",
+    "sides": "心跳字段: {left: {...}, right: {...}} 每侧六维力状态块",
+    "sides.left.force": "心跳字段: {fx, fy, fz} 三轴力(N)",
+    "sides.left.torque": "心跳字段: {tx, ty, tz} 三轴力矩(N·m)",
+    "sides.left.delta_from_baseline": "心跳字段: [dx, dy, dz] 相对 baseline 的增量(N)",
+    "sides.left.magnitude": "心跳字段: 合力增量大小(N)",
+    "sides.left.contact": "心跳字段: bool, magnitude>=threshold_n 时为 true",
+    "sides.left.baseline_status": "心跳字段: learning(启动中) / ready(零点已学习)",
+    "sides.right.*": "心跳字段: 同 sides.left, 右臂对应字段",
+    "event": "事件对象(仅状态变化时出现, 无事件时不发布)",
+    "event.event": "事件类型: contact_left / contact_right / release_left / release_right",
+    "event.side": "事件所属侧: left / right",
+    "event.direction": "方向(仅 contact_*): push_forward / push_back / push_left / push_right / push_up / push_down; release_* 固定为 'release'",
+    "event.magnitude": "事件时刻合力增量(N), 保留 3 位小数",
+    "event.delta_force": "事件时刻三轴力增量 [dx, dy, dz](N), 相对 baseline, 保留 3 位小数",
+    "event.timestamp_ms": "事件时间戳(ms)",
+    "timestamp_ms": "心跳时间戳(ms)",
+    "control_level": "心跳字段: ANY",
+    "units": "心跳字段: 各字段单位说明"
+  },
+  "event_fields": {
+    "contact_left": {
+      "event": "contact_left",
+      "side": "left",
+      "direction": "push_forward | push_back | push_left | push_right | push_up | push_down",
+      "magnitude": "合力增量(N), >=3.0 触发",
+      "delta_force": "[dx, dy, dz] 三轴力增量(N)",
+      "timestamp_ms": "事件时间戳(ms)"
+    },
+    "contact_right": {
+      "event": "contact_right",
+      "side": "right",
+      "direction": "push_forward | push_back | push_left | push_right | push_up | push_down",
+      "magnitude": "合力增量(N), >=3.0 触发",
+      "delta_force": "[dx, dy, dz] 三轴力增量(N)",
+      "timestamp_ms": "事件时间戳(ms)"
+    },
+    "release_left": {
+      "event": "release_left",
+      "side": "left",
+      "direction": "release",
+      "magnitude": "释放时刻合力增量(N)",
+      "delta_force": "[dx, dy, dz] 三轴力增量(N)",
+      "timestamp_ms": "事件时间戳(ms)"
+    },
+    "release_right": {
+      "event": "release_right",
+      "side": "right",
+      "direction": "release",
+      "magnitude": "释放时刻合力增量(N)",
+      "delta_force": "[dx, dy, dz] 三轴力增量(N)",
+      "timestamp_ms": "事件时间戳(ms)"
+    }
+  },
+  "mcp_tool": {
+    "name": "force_event",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "天轶2.0 双臂六维力事件 — 事件驱动, 仅 contact/release 状态变化时发布(无心跳, 无周期心跳)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/state/force_event",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "x-humanoid/tianyi2.0/device.py",
+    "class": "ForceTorqueStatePlugin",
+    "commit": "090a3e0"
+  }
+}
