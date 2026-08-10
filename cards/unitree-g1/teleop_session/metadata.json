@@ -1,0 +1,315 @@
+{
+  "card": "teleop_session",
+  "robot": "unitree-g1",
+  "author": "luoye-hcl",
+  "category": "actuator",
+  "control_level": "LOWLEVEL",
+  "version": "1.0.0",
+  "status": "offline-green",
+  "native_capture": {
+    "client_kind": "native_openxr",
+    "shared_source_path": "agent-core/clients/quest-capture-native",
+    "version_name": "0.2.0",
+    "version_code": 2,
+    "abi": "arm64-v8a",
+    "debug_signing": "apk-signature-scheme-v2-verified",
+    "zipalign": "verified",
+    "artifacts": {
+      "meta": {
+        "path": "app/build/outputs/apk/meta/debug/app-meta-debug.apk",
+        "package": "com.phanthymotus.questcapture",
+        "bytes": 2410871,
+        "sha256": "2eb14276da161b5945a0984dd2a691a69a3b898ed9ff1000871d9f843ed8a8c0",
+        "pvr_app_type": false,
+        "device_validation": "adb-unauthorized"
+      },
+      "pico": {
+        "path": "app/build/outputs/apk/pico/debug/app-pico-debug.apk",
+        "package": "com.phanthymotus.picocapture",
+        "bytes": 2411011,
+        "sha256": "e6a713af5194cc9e6a9c2538056ada45a726dcb60db248315d63db0b5fdabbac",
+        "pvr_app_type": true,
+        "controller_profiles": [
+          "/interaction_profiles/bytedance/pico4_controller",
+          "/interaction_profiles/bytedance/pico_ultra_controller_bd"
+        ],
+        "device_validation": "not-installed-or-run"
+      }
+    },
+    "robot_validation": "g1-powered-off-no-output"
+  },
+  "mcp_tool": {
+    "name": "teleop_session",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "Unitree G1_23 dual-arm controller teleoperation. Base and hands are disabled; only the root G1 Driver may own the arm_sdk publisher.",
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "stop",
+            "prepare_shadow",
+            "heartbeat",
+            "pause",
+            "release",
+            "soft_stop",
+            "status"
+          ]
+        },
+        "boot_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fence": {
+          "type": "string",
+          "minLength": 24
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "x-action-params": {
+        "stop": {
+          "params": [],
+          "description": "Release the teleoperation lifecycle safely"
+        },
+        "prepare_shadow": {
+          "params": [
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Prepare a zero-output G1 dual-arm Shadow session"
+        },
+        "heartbeat": {
+          "params": [
+            "boot_id",
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Renew the Core-owned lease"
+        },
+        "pause": {
+          "params": [
+            "boot_id",
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Pause and confirm safe output"
+        },
+        "release": {
+          "params": [
+            "boot_id",
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Release authority and confirm safe output"
+        },
+        "soft_stop": {
+          "params": [
+            "boot_id",
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Latch safe output until a newer prepare"
+        },
+        "status": {
+          "params": [],
+          "description": "Read bounded session and output diagnostics"
+        }
+      }
+    },
+    "x-teleop": {
+      "protocol": "motus.teleop.shadow.v1",
+      "mode": "shadow",
+      "profile_id": "unitree_g1_23_dual_arm_controller_v1",
+      "capabilities": {
+        "profile_id": "unitree_g1_23_dual_arm_controller_v1",
+        "input_bindings": {
+          "head": {
+            "required": true,
+            "role": "reference"
+          },
+          "left_controller": {
+            "required": true,
+            "role": "left_end_effector"
+          },
+          "right_controller": {
+            "required": true,
+            "role": "right_end_effector"
+          }
+        },
+        "outputs": {
+          "dual_arm": {
+            "enabled": true,
+            "joint_count": 10
+          },
+          "base": {
+            "enabled": false
+          },
+          "hands": {
+            "enabled": false
+          }
+        },
+        "effectors": [
+          "dual_arm"
+        ]
+      },
+      "dispatch_contract": "motus.teleop.dispatch.recording.v1",
+      "signaling": {
+        "protocol": "motus.teleop.webrtc-offer-answer.v1",
+        "path": "/offer",
+        "access": "authenticated-core-proxy-only",
+        "audience": "motus-teleop-rtc"
+      },
+      "driver_id": "unitree-g1",
+      "driver_name": "Unitree G1 Bundle",
+      "robot_id": "unitree-g1",
+      "actuation_enabled": false,
+      "capability_digest": "3a333966ddb1c146c3852e02e90b59825e6844d6fbd9937502741af3b96a0757"
+    }
+  },
+  "mode_variants": {
+    "shadow": {
+      "prepare_action": "prepare_shadow",
+      "protocol": "motus.teleop.shadow.v1",
+      "dispatch_contract": "motus.teleop.dispatch.recording.v1",
+      "actuation_enabled": false,
+      "capability_digest": "3a333966ddb1c146c3852e02e90b59825e6844d6fbd9937502741af3b96a0757"
+    },
+    "live": {
+      "prepare_action": "prepare_live",
+      "protocol": "motus.teleop.live.v1",
+      "dispatch_contract": "motus.teleop.dispatch.hardware.v1",
+      "actuation_enabled": true,
+      "requires_explicit_core_confirmation": true,
+      "capability_digest": "016f7e83955ec2dd47333b5ae2c33c85c695b43d2d1cc93b4bbdcc4055bfda4c"
+    }
+  },
+  "operator_actions": [
+    {
+      "id": "open_core_teleop_console",
+      "type": "navigate",
+      "method": "GET",
+      "path": "/teleop.html",
+      "label": "打开遥操控制台",
+      "minimum_control_role": "operator",
+      "direct_driver_call": false
+    }
+  ],
+  "status_projection": {
+    "source": "Core cached Driver teleop_session status / teleop_state",
+    "connection_fields": [
+      "rtc.connected",
+      "rtc.channels.teleop-control",
+      "rtc.channels.teleop-pose"
+    ],
+    "session_fields": [
+      "state",
+      "reason",
+      "authority_valid",
+      "lease.fresh",
+      "pose.fresh"
+    ],
+    "output_fields": [
+      "output.target_joint_positions_rad",
+      "output.measured_joint_positions_rad",
+      "output.max_abs_error_rad",
+      "output.arm_sdk_weight",
+      "output.fault_reason"
+    ],
+    "transport_fields": [
+      "rtc_rtt_ms",
+      "pose_age_ms",
+      "frame_rate_hz",
+      "frames_received",
+      "frames_rejected",
+      "sequence_gaps",
+      "mailbox_replacements"
+    ],
+    "latency_stages": [
+      "receive_to_admit",
+      "mailbox_wait",
+      "ik",
+      "adapter_apply",
+      "robot_follow"
+    ],
+    "shadow_sequence_field": "last_would_apply_sequence",
+    "live_sequence_field": "last_published_sequence",
+    "observed_states": {
+      "shadow": [
+        "idle",
+        "prepared_shadow",
+        "active_shadow",
+        "hold",
+        "paused",
+        "released",
+        "fault"
+      ],
+      "live": [
+        "idle",
+        "prepared_live",
+        "active_live",
+        "hold",
+        "paused",
+        "released",
+        "fault"
+      ]
+    }
+  },
+  "verification": {
+    "contract_matrix": "offline-pass",
+    "unitree_g1_tests": {
+      "passed": 57,
+      "total": 57
+    },
+    "runtime_packaging": {
+      "channel": "conda-forge",
+      "channel_policy": "nodefaults",
+      "python": "3.10",
+      "pinocchio": "3.1.0",
+      "casadi": "3.6.7",
+      "numpy": "1.26.4"
+    },
+    "ubuntu_x86_64_same_stack": {
+      "status": "offline-pass",
+      "ik_warmup_ms_approx": 16.7,
+      "solve_frames": 30,
+      "solve_ms": {
+        "p50_approx": 1.9,
+        "p95_approx": 2.2,
+        "max_observed_approx": 2.18
+      },
+      "max_end_effector_translation_error_mm_approx": 1.5,
+      "publisher_created": false
+    },
+    "quest_g1_live": "apk-built-adb-unauthorized-g1-powered-off",
+    "pico_g1_live": "apk-built-not-installed-or-run-g1-powered-off",
+    "linux_arm64_cold_ik_image": "not-built"
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "unitree/g1/teleop/service.py",
+    "class": "G1TeleopService",
+    "commit": "1afb292ef9b4d7a489024f59180268d9d13ce984"
+  }
+}
