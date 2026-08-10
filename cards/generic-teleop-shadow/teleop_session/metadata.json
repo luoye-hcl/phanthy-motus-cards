@@ -1,0 +1,179 @@
+{
+  "card": "teleop_session",
+  "robot": "generic-teleop-shadow",
+  "author": "luoye-hcl",
+  "category": "actuator",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "offline-green",
+  "native_capture": {
+    "client_kind": "native_openxr",
+    "shared_source_path": "agent-core/clients/quest-capture-native",
+    "version_name": "0.2.0",
+    "version_code": 2,
+    "abi": "arm64-v8a",
+    "debug_signing": "apk-signature-scheme-v2-verified",
+    "zipalign": "verified",
+    "artifacts": {
+      "meta": {
+        "path": "app/build/outputs/apk/meta/debug/app-meta-debug.apk",
+        "package": "com.phanthymotus.questcapture",
+        "bytes": 2410871,
+        "sha256": "2eb14276da161b5945a0984dd2a691a69a3b898ed9ff1000871d9f843ed8a8c0",
+        "pvr_app_type": false,
+        "device_validation": "adb-unauthorized"
+      },
+      "pico": {
+        "path": "app/build/outputs/apk/pico/debug/app-pico-debug.apk",
+        "package": "com.phanthymotus.picocapture",
+        "bytes": 2411011,
+        "sha256": "e6a713af5194cc9e6a9c2538056ada45a726dcb60db248315d63db0b5fdabbac",
+        "pvr_app_type": true,
+        "controller_profiles": [
+          "/interaction_profiles/bytedance/pico4_controller",
+          "/interaction_profiles/bytedance/pico_ultra_controller_bd"
+        ],
+        "device_validation": "not-installed-or-run"
+      }
+    },
+    "robot_validation": "g1-powered-off-no-output"
+  },
+  "mcp_tool": {
+    "name": "teleop_session",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "Robot-free Quest/WebRTC Shadow diagnostics with a bounded would-apply/would-stop final-dispatch trace. It can never actuate hardware; only authenticated MCP heartbeat renews the lease.",
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false
+    },
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "start",
+            "stop",
+            "prepare_shadow",
+            "heartbeat",
+            "pause",
+            "release",
+            "soft_stop",
+            "status",
+            "submit_shadow_frame"
+          ]
+        },
+        "boot_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "session_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fence": {
+          "type": "string",
+          "minLength": 24
+        },
+        "frame": {
+          "type": "object",
+          "description": "Strict Teleop Frame v1 object"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "x-action-params": {
+        "start": {
+          "params": [],
+          "description": "Passive lifecycle readiness check; never prepares a session"
+        },
+        "stop": {
+          "params": [],
+          "description": "Stop lifecycle and safely release the Shadow session"
+        },
+        "prepare_shadow": {
+          "params": [
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Install a new Core-issued epoch/fence for a Shadow session"
+        },
+        "heartbeat": {
+          "params": [
+            "boot_id",
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Renew the lease from authenticated Agent Core MCP only"
+        },
+        "pause": {
+          "params": [
+            "boot_id",
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Pause diagnostics and enter a non-resuming state"
+        },
+        "release": {
+          "params": [
+            "boot_id",
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Release the current fenced session"
+        },
+        "soft_stop": {
+          "params": [
+            "boot_id",
+            "session_id",
+            "epoch",
+            "fence"
+          ],
+          "description": "Enter HOLD; no hardware action exists"
+        },
+        "status": {
+          "params": [],
+          "description": "Read the current session and transport diagnostics"
+        },
+        "submit_shadow_frame": {
+          "params": [
+            "frame"
+          ],
+          "description": "Submit one strict Frame v1 for diagnostics/replay; not a production high-rate path"
+        }
+      }
+    },
+    "x-teleop": {
+      "protocol": "motus.teleop.shadow.v1",
+      "driver_id": "teleop-shadow-driver",
+      "driver_name": "Generic Teleop Shadow Diagnostics",
+      "robot_id": null,
+      "mode": "shadow",
+      "actuation_enabled": false,
+      "capability_digest": "0deb8aea9802bfd31b9e43df273ed79000ad7de7de9c1e024abd5da80583ae7e",
+      "dispatch_contract": "motus.teleop.dispatch.recording.v1",
+      "signaling": {
+        "protocol": "motus.teleop.webrtc-offer-answer.v1",
+        "path": "/offer",
+        "access": "authenticated-core-proxy-only"
+      }
+    }
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "generic/teleop_shadow/main.py",
+    "class": "ShadowDriverService",
+    "commit": "68f07c4fb367effca19ce46007b0bbafce158fa6"
+  }
+}

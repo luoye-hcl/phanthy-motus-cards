@@ -34,5 +34,6 @@ docs/
 | unitree-go1 | [feet](cards/unitree-go1/feet/) | sensor | ANY | ✅ 已验收 2026-07-14 | luoye-hcl |
 | unitree-go1 | [imu](cards/unitree-go1/imu/) | sensor | ANY | ✅ 已验收 2026-07-14 | luoye-hcl |
 | unitree-go1 | [loco_state](cards/unitree-go1/loco_state/) | sensor | HIGHLEVEL | ✅ 已验收 2026-07-14 | luoye-hcl |
+| generic-teleop-shadow | [teleop_session](cards/generic-teleop-shadow/teleop_session/) | actuator（零执行） | ANY | 🟢 offline-green 2026-08-09 | luoye-hcl |
 
 > 收录一张卡后,请在此表加一行。
