@@ -1,0 +1,53 @@
+{
+  "card": "heartbeat",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/system/heartbeat",
+  "rate_hz": 3.5,
+  "payload_fields": [
+    "stamp_sec",
+    "stamp_nanosec",
+    "frame_id"
+  ],
+  "mcp_tool": {
+    "name": "heartbeat",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 系统心跳：动态启动管理器(dynamic_launch_manager)存活监测，用于判断主控软件是否在运行",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/heartbeat",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/heartbeat.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

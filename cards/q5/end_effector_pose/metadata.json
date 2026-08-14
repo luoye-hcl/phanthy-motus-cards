@@ -1,0 +1,51 @@
+{
+  "card": "end_effector_pose",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/mobile_manipulator/end_effector_pose",
+  "rate_hz": null,
+  "payload_fields": [
+    "data"
+  ],
+  "mcp_tool": {
+    "name": "end_effector_pose",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 末端执行器位姿：机械臂末端位置(xyz)与姿态(四元数)，Float32MultiArray。数据稀疏，仅在移动操作模式发布",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/end_effector_pose",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/end_effector_pose.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

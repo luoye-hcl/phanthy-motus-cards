@@ -1,0 +1,57 @@
+{
+  "card": "system_health",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/motion_manager/motion_status",
+  "rate_hz": 2.0,
+  "payload_fields": [
+    "readings",
+    "maximum_celsius",
+    "minimum_celsius",
+    "robot_active",
+    "available_sources",
+    "stale_sources",
+    "all_required_sources_fresh"
+  ],
+  "mcp_tool": {
+    "name": "system_health",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 运行健康：运动状态、FSM 状态、温度和聚合故障，综合评估机器人健康",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/system_health",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/system_health.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

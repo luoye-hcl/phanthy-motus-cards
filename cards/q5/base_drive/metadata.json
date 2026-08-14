@@ -1,0 +1,178 @@
+{
+  "card": "base_drive",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "LOWLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/wr1_base_drive_controller/cmd_vel",
+  "rate_hz": null,
+  "payload_fields": null,
+  "mcp_tool": {
+    "name": "base_drive",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "Q5 底盘速度控制：前进、后退、左转、右转与高级速度组合；每次动作自动停车",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "start",
+            "forward",
+            "backward",
+            "turn_left",
+            "turn_right",
+            "move",
+            "cancel",
+            "info"
+          ],
+          "oneOf": [
+            {
+              "const": "start",
+              "title": "检查控制条件"
+            },
+            {
+              "const": "forward",
+              "title": "前进"
+            },
+            {
+              "const": "backward",
+              "title": "后退"
+            },
+            {
+              "const": "turn_left",
+              "title": "原地左转"
+            },
+            {
+              "const": "turn_right",
+              "title": "原地右转"
+            },
+            {
+              "const": "move",
+              "title": "高级：组合速度"
+            },
+            {
+              "const": "cancel",
+              "title": "立即停止"
+            },
+            {
+              "const": "info",
+              "title": "查看状态"
+            }
+          ],
+          "description": "方向动作到时自动停止；停止会立即重复发送零速度。"
+        },
+        "speed_mps": {
+          "type": "number",
+          "title": "移动速度 (m/s)",
+          "minimum": 0.01,
+          "maximum": 0.2,
+          "multipleOf": 0.01,
+          "default": 0.1,
+          "description": "范围[0.01,0.2]m/s"
+        },
+        "turn_speed_radps": {
+          "type": "number",
+          "title": "转向速度 (rad/s)",
+          "minimum": 0.01,
+          "maximum": 0.4,
+          "multipleOf": 0.01,
+          "default": 0.2,
+          "description": "范围[0.01,0.4]rad/s"
+        },
+        "linear_x": {
+          "type": "number",
+          "title": "前后速度 (m/s)",
+          "minimum": -0.2,
+          "maximum": 0.2,
+          "multipleOf": 0.01,
+          "default": 0.1,
+          "description": "范围[-0.2,0.2]m/s"
+        },
+        "angular_z": {
+          "type": "number",
+          "title": "转向速度 (rad/s)",
+          "minimum": -0.4,
+          "maximum": 0.4,
+          "multipleOf": 0.01,
+          "default": 0.0,
+          "description": "范围[-0.4,0.4]rad/s"
+        },
+        "duration_s": {
+          "type": "number",
+          "title": "持续时间 (秒)",
+          "minimum": 0.1,
+          "maximum": 2.0,
+          "multipleOf": 0.1,
+          "default": 0.5,
+          "description": "范围[0.1,2]秒"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false,
+      "x-action-params": {
+        "start": {
+          "params": [],
+          "description": "检查控制锁、发布者冲突和当前限制。"
+        },
+        "forward": {
+          "params": [
+            "speed_mps",
+            "duration_s"
+          ],
+          "description": "以设定速度直线前进，到时自动停车。"
+        },
+        "backward": {
+          "params": [
+            "speed_mps",
+            "duration_s"
+          ],
+          "description": "以设定速度直线后退，到时自动停车。"
+        },
+        "turn_left": {
+          "params": [
+            "turn_speed_radps",
+            "duration_s"
+          ],
+          "description": "以设定速度原地左转，到时自动停车。"
+        },
+        "turn_right": {
+          "params": [
+            "turn_speed_radps",
+            "duration_s"
+          ],
+          "description": "以设定速度原地右转，到时自动停车。"
+        },
+        "move": {
+          "params": [
+            "linear_x",
+            "angular_z",
+            "duration_s"
+          ],
+          "description": "高级模式：同时设置前后与转向速度，到时自动停车。"
+        },
+        "cancel": {
+          "params": [],
+          "description": "立即发送零速度。"
+        },
+        "info": {
+          "params": [],
+          "description": "查看当前命令和安全条件。"
+        }
+      }
+    },
+    "topic_out": []
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/base_drive.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

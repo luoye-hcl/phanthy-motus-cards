@@ -1,0 +1,56 @@
+{
+  "card": "battery",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/battery_state",
+  "rate_hz": 2.0,
+  "payload_fields": [
+    "percentage",
+    "level",
+    "voltage_v",
+    "temperature_c",
+    "source_topic",
+    "fresh"
+  ],
+  "mcp_tool": {
+    "name": "battery",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 电池：电量、状态、电压和温度，用于判断是否需要充电",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/battery",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/battery.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}
