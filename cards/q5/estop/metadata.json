@@ -1,0 +1,56 @@
+{
+  "card": "estop",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/xbot_state",
+  "rate_hz": 2.0,
+  "payload_fields": [
+    "emergency_stop",
+    "fsm_estop_detected",
+    "fsm_estop_reported",
+    "fsm_state",
+    "fsm_message",
+    "source_topic"
+  ],
+  "mcp_tool": {
+    "name": "estop",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 急停状态监测：只读，不提供解除急停或电源控制",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/estop",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/estop.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

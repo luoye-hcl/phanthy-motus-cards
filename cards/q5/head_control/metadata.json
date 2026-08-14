@@ -1,0 +1,109 @@
+{
+  "card": "head_control",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "LOWLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/wr1_controller/commands",
+  "rate_hz": null,
+  "payload_fields": null,
+  "mcp_tool": {
+    "name": "head_control",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "Q5 头部控制：偏航（左右转头）和俯仰（抬头/低头）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "start",
+            "neck_yaw",
+            "neck_pitch",
+            "cancel",
+            "info"
+          ],
+          "oneOf": [
+            {
+              "const": "start",
+              "title": "检查连接状态"
+            },
+            {
+              "const": "neck_yaw",
+              "title": "偏航：左右转头"
+            },
+            {
+              "const": "neck_pitch",
+              "title": "俯仰：抬头/低头"
+            },
+            {
+              "const": "cancel",
+              "title": "取消并保持"
+            },
+            {
+              "const": "info",
+              "title": "查看状态"
+            }
+          ]
+        },
+        "neck_yaw_rad": {
+          "type": "number",
+          "title": "偏航角度 (rad)",
+          "minimum": -0.79,
+          "maximum": 0.79,
+          "multipleOf": 0.005,
+          "description": "范围[-0.79,0.79]rad；正负按坐标系。"
+        },
+        "neck_pitch_rad": {
+          "type": "number",
+          "title": "俯仰角度 (rad)",
+          "minimum": -0.26,
+          "maximum": 0.7,
+          "multipleOf": 0.005,
+          "description": "范围[-0.26,0.7]rad；正抬头负低头。"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false,
+      "x-action-params": {
+        "start": {
+          "params": [],
+          "description": "检查 ROS 连接和机器人状态。"
+        },
+        "neck_yaw": {
+          "params": [
+            "neck_yaw_rad"
+          ],
+          "description": "偏航：左右转头，范围[-0.79,0.79]rad。"
+        },
+        "neck_pitch": {
+          "params": [
+            "neck_pitch_rad"
+          ],
+          "description": "俯仰：抬头/低头，范围[-0.26,0.7]rad。"
+        },
+        "cancel": {
+          "params": [],
+          "description": "取消当前微调，并保持当前位置。"
+        },
+        "info": {
+          "params": [],
+          "description": "查看运动状态与安全条件。"
+        }
+      }
+    },
+    "topic_out": []
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/head_control.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

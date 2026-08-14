@@ -1,0 +1,58 @@
+{
+  "card": "joints",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/joint_states",
+  "rate_hz": 10.0,
+  "payload_fields": [
+    "joints",
+    "joint_count",
+    "position_unit",
+    "source_topic",
+    "fresh",
+    "available",
+    "age_ms",
+    "stale"
+  ],
+  "mcp_tool": {
+    "name": "joints",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 实时身体与双手骨架：由 /joint_states 驱动的实机 URDF 可视化，用于查看机器人当前姿势。位置单位为弧度(rad)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/joints",
+        "format": "sensor/skeleton"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/joints.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

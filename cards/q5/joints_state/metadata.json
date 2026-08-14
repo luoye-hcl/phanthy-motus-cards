@@ -1,0 +1,58 @@
+{
+  "card": "joints_state",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/joint_states",
+  "rate_hz": 10.0,
+  "payload_fields": [
+    "joint_count",
+    "position_unit",
+    "groups",
+    "positions",
+    "velocities",
+    "efforts",
+    "source_topic",
+    "fresh"
+  ],
+  "mcp_tool": {
+    "name": "joints_state",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 完整关节状态：身体、左手、右手的实际 position、velocity、effort，用于查看各关节角度/速度/力矩。位置单位弧度(rad)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/joints_state",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/joints_state.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

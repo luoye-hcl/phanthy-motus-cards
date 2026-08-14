@@ -1,0 +1,68 @@
+# odom —— Q5 里程计(状态卡)
+
+## 基本信息
+
+| 项 | 值 |
+|---|---|
+| 机器人 | `q5` |
+| 卡片名(MCP 工具名) | `odom` |
+| 类型 | `sensor`(只读) |
+| 控制等级 | `HIGHLEVEL` |
+| 作者 | `huangchanglong` |
+| 状态 | `draft`(驱动插件已实现,待部署验证) |
+
+## 能力
+
+订阅 `/wr1_base_drive_controller/odom`(`nav_msgs/msg/Odometry`),读取 Q5 里程计。数据经 q5_bus_bridge 桥接到 Agent Core topic `/{ns}/q5/odom`(Domain 42 FastDDS)。
+
+## 接口
+
+- MCP 工具名:`odom`
+- 调用:`{"action":"info"}`(读当前值) / `{"action":"start"}` / `{"action":"stop"}`
+- 返回包络(成功):`{ok:true, card, state, data:{...}, timestamp_ms}`
+
+### Actions
+
+| action | 入参 | 说明 |
+|---|---|---|
+| `info` | 无 | 读取当前 里程计 |
+| `start` | 无 | 启动卡片发布 |
+| `stop` | 无 | 停止卡片发布 |
+
+### ROS2 话题
+
+| topic | 消息类型 |
+|---|---|
+| `/wr1_base_drive_controller/odom` | `nav_msgs/msg/Odometry` |
+
+### 返回字段
+
+| 字段 | 类型 | 单位 | 说明 |
+|---|---|---|---|
+| `position_x/y/z` | float64 | m | 底盘位置 |
+| `orientation_x/y/z/w` | float64 | - | 姿态四元数 |
+| `linear_x/y/z` | float64 | m/s | 线速度 |
+| `angular_x/y/z` | float64 | rad/s | 角速度 |
+| `frame_id` | string | - | odom |
+| `child_frame_id` | string | - | base_link |
+
+### 返回示例
+
+```json
+{"frame_id":"odom","child_frame_id":"base_link",
+ "position":{"x":0.0,"y":0.0,"z":0.0},
+ "orientation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},
+ "linear":{"x":0.0,"y":0.0,"z":0.0},"angular":{"x":0.0,"y":0.0,"z":0.0}}
+```
+
+## 数据来源 / 实现位置
+
+- 源仓库:`robotera-q5-driver`(image: `robotera-q5`)
+- 文件:`odom.py`  类:`Plugin`(**已实现**——自建 ROS2 Node 订阅 `/wr1_base_drive_controller/odom`)
+- 依赖:`sensor_contract.py`、`nav_msgs/msg/Odometry`
+- 注册:`main.py` 插件聚合;MCP 端口 15794,注册到 Agent Core
+
+## 状态说明
+
+- 数据源:`/wr1_base_drive_controller/odom` 真机已验证(✅ 有数据流)。
+- 驱动插件:已实现,自建 Node 订阅 Odometry 消息。待部署到 q5-driver-huang 验证。

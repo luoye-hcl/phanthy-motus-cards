@@ -1,0 +1,107 @@
+{
+  "card": "simple_action",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "LOWLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/simple_actions",
+  "rate_hz": null,
+  "payload_fields": null,
+  "mcp_tool": {
+    "name": "simple_action",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "Q5 预定义动作：标准初始姿势和抬臂（zero 零位复位 / initpose_handsdown 垂手初始姿势 / lift_up 抬臂动作）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "start",
+            "run",
+            "cancel",
+            "info"
+          ],
+          "oneOf": [
+            {
+              "const": "start",
+              "title": "检查动作条件"
+            },
+            {
+              "const": "run",
+              "title": "执行预设动作"
+            },
+            {
+              "const": "cancel",
+              "title": "取消当前动作"
+            },
+            {
+              "const": "info",
+              "title": "查看状态"
+            }
+          ],
+          "description": "仅限白名单动作。"
+        },
+        "action_name": {
+          "type": "string",
+          "title": "预设动作",
+          "enum": [
+            "zero",
+            "initpose_handsdown",
+            "lift_up"
+          ],
+          "oneOf": [
+            {
+              "const": "zero",
+              "title": "零位复位"
+            },
+            {
+              "const": "initpose_handsdown",
+              "title": "垂手初始姿势"
+            },
+            {
+              "const": "lift_up",
+              "title": "抬臂动作"
+            }
+          ],
+          "description": "时长由厂商定义。"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false,
+      "x-action-params": {
+        "start": {
+          "params": [],
+          "description": "检查动作服务和机器人状态。"
+        },
+        "run": {
+          "params": [
+            "action_name"
+          ],
+          "description": "执行一个白名单预设动作。"
+        },
+        "cancel": {
+          "params": [],
+          "description": "请求取消正在执行的动作。"
+        },
+        "info": {
+          "params": [],
+          "description": "查看动作执行状态和安全条件。"
+        }
+      }
+    },
+    "topic_out": []
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/simple_action.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "card": "robot_ready",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/xbot_state",
+  "rate_hz": 2.0,
+  "payload_fields": [
+    "robot_state",
+    "robot_status",
+    "motion_manager_lifecycle",
+    "motion_ready",
+    "ready",
+    "message"
+  ],
+  "mcp_tool": {
+    "name": "robot_ready",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 当前业务状态：以 /xbot_state 的 READY/ACTIVE 等厂商状态为准，判断机器人是否就绪可执行动作",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/robot_ready",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/robot_ready.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

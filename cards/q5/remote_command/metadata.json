@@ -1,0 +1,52 @@
+{
+  "card": "remote_command",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/send_remote/command",
+  "rate_hz": 50.0,
+  "payload_fields": [
+    "axes",
+    "buttons"
+  ],
+  "mcp_tool": {
+    "name": "remote_command",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 遥控指令：手柄按键(buttons)与摇杆(axes)输入，用于监测人工遥控操作",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/remote_command",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/remote_command.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}
