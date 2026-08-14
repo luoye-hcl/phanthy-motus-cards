@@ -1,0 +1,65 @@
+{
+  "card": "odom",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/wr1_base_drive_controller/odom",
+  "rate_hz": 50.0,
+  "payload_fields": [
+    "position_x",
+    "position_y",
+    "position_z",
+    "orientation_x",
+    "orientation_y",
+    "orientation_z",
+    "orientation_w",
+    "linear_x",
+    "linear_y",
+    "linear_z",
+    "angular_x",
+    "angular_y",
+    "angular_z",
+    "frame_id",
+    "child_frame_id"
+  ],
+  "mcp_tool": {
+    "name": "odom",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 里程计：底盘位置、姿态和速度，用于定位与导航。位置单位米(m)，姿态四元数，速度 m/s、rad/s",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/odom",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/odom.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

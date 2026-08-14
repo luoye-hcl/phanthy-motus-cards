@@ -1,0 +1,231 @@
+{
+  "card": "hand_control",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "LOWLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/hand_controller/commands",
+  "rate_hz": null,
+  "payload_fields": null,
+  "mcp_tool": {
+    "name": "hand_control",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "Q5 XHand Lite 完整关节控制：可同时设置任意左右手手指目标（12 个手指关节，范围 0~1 rad）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "start",
+            "open_hand",
+            "close_hand",
+            "set_hand",
+            "set_finger",
+            "set",
+            "cancel",
+            "info"
+          ],
+          "oneOf": [
+            {
+              "const": "start",
+              "title": "检查连接状态"
+            },
+            {
+              "const": "open_hand",
+              "title": "张开整手"
+            },
+            {
+              "const": "close_hand",
+              "title": "合拢整手"
+            },
+            {
+              "const": "set_hand",
+              "title": "设置整手弯曲程度"
+            },
+            {
+              "const": "set_finger",
+              "title": "设置单指弯曲程度"
+            },
+            {
+              "const": "set",
+              "title": "高级：指定关节目标"
+            },
+            {
+              "const": "cancel",
+              "title": "取消并保持"
+            },
+            {
+              "const": "info",
+              "title": "查看状态"
+            }
+          ],
+          "description": "先选左/右/双手；thumb 可同时设弯曲和旋转。"
+        },
+        "side": {
+          "type": "string",
+          "title": "执行侧",
+          "enum": [
+            "left",
+            "right",
+            "both"
+          ],
+          "oneOf": [
+            {
+              "const": "left",
+              "title": "左手"
+            },
+            {
+              "const": "right",
+              "title": "右手"
+            },
+            {
+              "const": "both",
+              "title": "双手"
+            }
+          ],
+          "default": "both",
+          "description": "先选左/右/双手。"
+        },
+        "finger": {
+          "type": "string",
+          "title": "手指",
+          "enum": [
+            "thumb",
+            "index",
+            "middle",
+            "ring",
+            "pinky"
+          ],
+          "oneOf": [
+            {
+              "const": "thumb",
+              "title": "拇指"
+            },
+            {
+              "const": "index",
+              "title": "食指"
+            },
+            {
+              "const": "middle",
+              "title": "中指"
+            },
+            {
+              "const": "ring",
+              "title": "无名指"
+            },
+            {
+              "const": "pinky",
+              "title": "小指"
+            }
+          ],
+          "description": "选 thumb 可同时设弯曲和旋转。"
+        },
+        "curl_rad": {
+          "type": "number",
+          "title": "弯曲角度(rad)",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "multipleOf": 0.01,
+          "default": 0.2,
+          "description": "范围[0,1]rad"
+        },
+        "rotation_rad": {
+          "type": "number",
+          "title": "拇指旋转(rad)",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "multipleOf": 0.01,
+          "default": 0.0,
+          "description": "范围[0,1]rad"
+        },
+        "targets": {
+          "type": "array",
+          "title": "关节目标",
+          "minItems": 1,
+          "maxItems": 12,
+          "x-widget": "json",
+          "items": {
+            "type": "object",
+            "properties": {
+              "joint_name": {
+                "type": "string",
+                "description": "XHand Lite 执行关节名称"
+              },
+              "position_rad": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "description": "范围[0,1]rad"
+              }
+            }
+          },
+          "description": "每项：关节名+目标角度。"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false,
+      "x-action-params": {
+        "start": {
+          "params": [],
+          "description": "检查 ROS 连接和机器人状态。"
+        },
+        "open_hand": {
+          "params": [
+            "side"
+          ],
+          "description": "将选中手完整张开到 0 rad。"
+        },
+        "close_hand": {
+          "params": [
+            "side"
+          ],
+          "description": "将选中手完整合拢到 1 rad。"
+        },
+        "set_hand": {
+          "params": [
+            "side",
+            "curl_rad"
+          ],
+          "description": "为整只手设定统一的弯曲程度。"
+        },
+        "set_finger": {
+          "params": [
+            "side",
+            "finger",
+            "curl_rad",
+            "rotation_rad"
+          ],
+          "description": "thumb 可填弯曲+旋转"
+        },
+        "set": {
+          "params": [
+            "targets"
+          ],
+          "description": "高级模式：用 JSON 指定多个关节的绝对目标。"
+        },
+        "cancel": {
+          "params": [],
+          "description": "取消当前插补，并保持当前位置。"
+        },
+        "info": {
+          "params": [],
+          "description": "查看运动状态与安全条件。"
+        }
+      }
+    },
+    "topic_out": []
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/hand_control.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

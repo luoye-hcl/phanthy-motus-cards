@@ -1,0 +1,55 @@
+{
+  "card": "nav_state",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/era_nav/nav_status",
+  "rate_hz": 2.0,
+  "payload_fields": [
+    "status",
+    "has_status",
+    "source_topic",
+    "source_publisher_count",
+    "fresh"
+  ],
+  "mcp_tool": {
+    "name": "nav_state",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 ERA 导航状态：透传厂商状态文本，不执行导航",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/nav_state",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/nav_state.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

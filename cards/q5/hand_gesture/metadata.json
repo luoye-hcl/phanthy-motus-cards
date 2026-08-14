@@ -1,0 +1,206 @@
+{
+  "card": "hand_gesture",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "LOWLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/hand_controller/commands",
+  "rate_hz": null,
+  "payload_fields": null,
+  "mcp_tool": {
+    "name": "hand_gesture",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "Q5 XHand Lite 预设手势：张手、握拳、指向、捏取及常用手势（10 个预设）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "start",
+            "open_hand",
+            "light_grip",
+            "closed_fist",
+            "point",
+            "pinch",
+            "victory",
+            "thumbs_up",
+            "ok_sign",
+            "three",
+            "rock",
+            "cancel",
+            "info"
+          ],
+          "oneOf": [
+            {
+              "const": "start",
+              "title": "检查连接状态"
+            },
+            {
+              "const": "open_hand",
+              "title": "张手"
+            },
+            {
+              "const": "light_grip",
+              "title": "轻握"
+            },
+            {
+              "const": "closed_fist",
+              "title": "完全握拳"
+            },
+            {
+              "const": "point",
+              "title": "指向"
+            },
+            {
+              "const": "pinch",
+              "title": "捏取"
+            },
+            {
+              "const": "victory",
+              "title": "胜利手势"
+            },
+            {
+              "const": "thumbs_up",
+              "title": "点赞"
+            },
+            {
+              "const": "ok_sign",
+              "title": "OK 手势"
+            },
+            {
+              "const": "three",
+              "title": "比三"
+            },
+            {
+              "const": "rock",
+              "title": "摇滚手势"
+            },
+            {
+              "const": "cancel",
+              "title": "取消并保持"
+            },
+            {
+              "const": "info",
+              "title": "查看状态"
+            }
+          ]
+        },
+        "side": {
+          "type": "string",
+          "title": "执行侧",
+          "enum": [
+            "left",
+            "right",
+            "both"
+          ],
+          "oneOf": [
+            {
+              "const": "left",
+              "title": "左手"
+            },
+            {
+              "const": "right",
+              "title": "右手"
+            },
+            {
+              "const": "both",
+              "title": "双手"
+            }
+          ],
+          "default": "both",
+          "description": "对指定手执行预设手势。"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false,
+      "x-action-params": {
+        "start": {
+          "params": [],
+          "description": "检查 ROS 连接和机器人状态。"
+        },
+        "open_hand": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行张手预设。"
+        },
+        "light_grip": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行轻握预设。"
+        },
+        "closed_fist": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行完全握拳预设。"
+        },
+        "point": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行指向预设。"
+        },
+        "pinch": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行捏取预设。"
+        },
+        "victory": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行胜利手势预设。"
+        },
+        "thumbs_up": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行点赞预设。"
+        },
+        "ok_sign": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行OK 手势预设。"
+        },
+        "three": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行比三预设。"
+        },
+        "rock": {
+          "params": [
+            "side"
+          ],
+          "description": "对指定手执行摇滚手势预设。"
+        },
+        "cancel": {
+          "params": [],
+          "description": "取消当前手势，并保持当前位置。"
+        },
+        "info": {
+          "params": [],
+          "description": "查看运动状态与安全条件。"
+        }
+      }
+    },
+    "topic_out": []
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/hand_gesture.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

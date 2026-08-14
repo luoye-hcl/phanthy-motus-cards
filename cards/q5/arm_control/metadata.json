@@ -1,0 +1,338 @@
+{
+  "card": "arm_control",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "LOWLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/wr1_controller/commands",
+  "rate_hz": null,
+  "payload_fields": null,
+  "mcp_tool": {
+    "name": "arm_control",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "Q5 手臂控制：将单个关节设置到指定安全角度（左右各 7 个身体关节）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "start",
+            "left_shoulder_pitch_joint",
+            "left_shoulder_roll_joint",
+            "left_arm_yaw_joint",
+            "left_elbow_pitch_joint",
+            "left_elbow_yaw_joint",
+            "left_wrist_pitch_joint",
+            "left_wrist_roll_joint",
+            "right_shoulder_pitch_joint",
+            "right_shoulder_roll_joint",
+            "right_arm_yaw_joint",
+            "right_elbow_pitch_joint",
+            "right_elbow_yaw_joint",
+            "right_wrist_pitch_joint",
+            "right_wrist_roll_joint",
+            "cancel",
+            "info"
+          ],
+          "oneOf": [
+            {
+              "const": "start",
+              "title": "检查连接状态"
+            },
+            {
+              "const": "left_shoulder_pitch_joint",
+              "title": "左肩俯仰"
+            },
+            {
+              "const": "left_shoulder_roll_joint",
+              "title": "左肩横滚"
+            },
+            {
+              "const": "left_arm_yaw_joint",
+              "title": "左上臂偏航"
+            },
+            {
+              "const": "left_elbow_pitch_joint",
+              "title": "左肘俯仰"
+            },
+            {
+              "const": "left_elbow_yaw_joint",
+              "title": "左肘偏航"
+            },
+            {
+              "const": "left_wrist_pitch_joint",
+              "title": "左腕俯仰"
+            },
+            {
+              "const": "left_wrist_roll_joint",
+              "title": "左腕旋转"
+            },
+            {
+              "const": "right_shoulder_pitch_joint",
+              "title": "右肩俯仰"
+            },
+            {
+              "const": "right_shoulder_roll_joint",
+              "title": "右肩横滚"
+            },
+            {
+              "const": "right_arm_yaw_joint",
+              "title": "右上臂偏航"
+            },
+            {
+              "const": "right_elbow_pitch_joint",
+              "title": "右肘俯仰"
+            },
+            {
+              "const": "right_elbow_yaw_joint",
+              "title": "右肘偏航"
+            },
+            {
+              "const": "right_wrist_pitch_joint",
+              "title": "右腕俯仰"
+            },
+            {
+              "const": "right_wrist_roll_joint",
+              "title": "右腕旋转"
+            },
+            {
+              "const": "cancel",
+              "title": "取消并保持当前角度"
+            },
+            {
+              "const": "info",
+              "title": "查看状态"
+            }
+          ],
+          "description": "将指定关节设置到目标角度；cancel 保持当前角度。"
+        },
+        "left_shoulder_pitch_rad": {
+          "type": "number",
+          "title": "左肩俯仰 (rad)",
+          "minimum": -2.79,
+          "maximum": 2.79,
+          "multipleOf": 0.005,
+          "description": "范围[-2.79,2.79]rad"
+        },
+        "left_shoulder_roll_rad": {
+          "type": "number",
+          "title": "左肩横滚 (rad)",
+          "minimum": -0.24,
+          "maximum": 1.83,
+          "multipleOf": 0.005,
+          "description": "范围[-0.24,1.83]rad"
+        },
+        "left_arm_yaw_rad": {
+          "type": "number",
+          "title": "左上臂偏航 (rad)",
+          "minimum": -2.62,
+          "maximum": 2.62,
+          "multipleOf": 0.005,
+          "description": "范围[-2.62,2.62]rad"
+        },
+        "left_elbow_pitch_rad": {
+          "type": "number",
+          "title": "左肘俯仰 (rad)",
+          "minimum": -2.27,
+          "maximum": 0.09,
+          "multipleOf": 0.005,
+          "description": "范围[-2.27,0.09]rad"
+        },
+        "left_elbow_yaw_rad": {
+          "type": "number",
+          "title": "左肘偏航 (rad)",
+          "minimum": -2.62,
+          "maximum": 2.62,
+          "multipleOf": 0.005,
+          "description": "范围[-2.62,2.62]rad"
+        },
+        "left_wrist_pitch_rad": {
+          "type": "number",
+          "title": "左腕俯仰 (rad)",
+          "minimum": -1.05,
+          "maximum": 1.05,
+          "multipleOf": 0.005,
+          "description": "范围[-1.05,1.05]rad"
+        },
+        "left_wrist_roll_rad": {
+          "type": "number",
+          "title": "左腕旋转 (rad)",
+          "minimum": -1.05,
+          "maximum": 1.05,
+          "multipleOf": 0.005,
+          "description": "范围[-1.05,1.05]rad"
+        },
+        "right_shoulder_pitch_rad": {
+          "type": "number",
+          "title": "右肩俯仰 (rad)",
+          "minimum": -2.79,
+          "maximum": 2.79,
+          "multipleOf": 0.005,
+          "description": "范围[-2.79,2.79]rad"
+        },
+        "right_shoulder_roll_rad": {
+          "type": "number",
+          "title": "右肩横滚 (rad)",
+          "minimum": -1.83,
+          "maximum": 0.24,
+          "multipleOf": 0.005,
+          "description": "范围[-1.83,0.24]rad"
+        },
+        "right_arm_yaw_rad": {
+          "type": "number",
+          "title": "右上臂偏航 (rad)",
+          "minimum": -2.62,
+          "maximum": 2.62,
+          "multipleOf": 0.005,
+          "description": "范围[-2.62,2.62]rad"
+        },
+        "right_elbow_pitch_rad": {
+          "type": "number",
+          "title": "右肘俯仰 (rad)",
+          "minimum": -2.27,
+          "maximum": 0.09,
+          "multipleOf": 0.005,
+          "description": "范围[-2.27,0.09]rad"
+        },
+        "right_elbow_yaw_rad": {
+          "type": "number",
+          "title": "右肘偏航 (rad)",
+          "minimum": -2.62,
+          "maximum": 2.62,
+          "multipleOf": 0.005,
+          "description": "范围[-2.62,2.62]rad"
+        },
+        "right_wrist_pitch_rad": {
+          "type": "number",
+          "title": "右腕俯仰 (rad)",
+          "minimum": -1.05,
+          "maximum": 1.05,
+          "multipleOf": 0.005,
+          "description": "范围[-1.05,1.05]rad"
+        },
+        "right_wrist_roll_rad": {
+          "type": "number",
+          "title": "右腕旋转 (rad)",
+          "minimum": -1.05,
+          "maximum": 1.05,
+          "multipleOf": 0.005,
+          "description": "范围[-1.05,1.05]rad"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false,
+      "x-action-params": {
+        "start": {
+          "params": [],
+          "description": "检查 ROS 连接和机器人状态。"
+        },
+        "left_shoulder_pitch_joint": {
+          "params": [
+            "left_shoulder_pitch_rad"
+          ],
+          "description": "左肩俯仰；范围[-2.79,2.79]rad"
+        },
+        "left_shoulder_roll_joint": {
+          "params": [
+            "left_shoulder_roll_rad"
+          ],
+          "description": "左肩横滚；范围[-0.24,1.83]rad"
+        },
+        "left_arm_yaw_joint": {
+          "params": [
+            "left_arm_yaw_rad"
+          ],
+          "description": "左上臂偏航；范围[-2.62,2.62]rad"
+        },
+        "left_elbow_pitch_joint": {
+          "params": [
+            "left_elbow_pitch_rad"
+          ],
+          "description": "左肘俯仰；范围[-2.27,0.09]rad"
+        },
+        "left_elbow_yaw_joint": {
+          "params": [
+            "left_elbow_yaw_rad"
+          ],
+          "description": "左肘偏航；范围[-2.62,2.62]rad"
+        },
+        "left_wrist_pitch_joint": {
+          "params": [
+            "left_wrist_pitch_rad"
+          ],
+          "description": "左腕俯仰；范围[-1.05,1.05]rad"
+        },
+        "left_wrist_roll_joint": {
+          "params": [
+            "left_wrist_roll_rad"
+          ],
+          "description": "左腕旋转；范围[-1.05,1.05]rad"
+        },
+        "right_shoulder_pitch_joint": {
+          "params": [
+            "right_shoulder_pitch_rad"
+          ],
+          "description": "右肩俯仰；范围[-2.79,2.79]rad"
+        },
+        "right_shoulder_roll_joint": {
+          "params": [
+            "right_shoulder_roll_rad"
+          ],
+          "description": "右肩横滚；范围[-1.83,0.24]rad"
+        },
+        "right_arm_yaw_joint": {
+          "params": [
+            "right_arm_yaw_rad"
+          ],
+          "description": "右上臂偏航；范围[-2.62,2.62]rad"
+        },
+        "right_elbow_pitch_joint": {
+          "params": [
+            "right_elbow_pitch_rad"
+          ],
+          "description": "右肘俯仰；范围[-2.27,0.09]rad"
+        },
+        "right_elbow_yaw_joint": {
+          "params": [
+            "right_elbow_yaw_rad"
+          ],
+          "description": "右肘偏航；范围[-2.62,2.62]rad"
+        },
+        "right_wrist_pitch_joint": {
+          "params": [
+            "right_wrist_pitch_rad"
+          ],
+          "description": "右腕俯仰；范围[-1.05,1.05]rad"
+        },
+        "right_wrist_roll_joint": {
+          "params": [
+            "right_wrist_roll_rad"
+          ],
+          "description": "右腕旋转；范围[-1.05,1.05]rad"
+        },
+        "cancel": {
+          "params": [],
+          "description": "取消微调，并保持当前关节角度。"
+        },
+        "info": {
+          "params": [],
+          "description": "查看当前运动和安全条件。"
+        }
+      }
+    },
+    "topic_out": []
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/arm_control.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}

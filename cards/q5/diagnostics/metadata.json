@@ -1,0 +1,55 @@
+{
+  "card": "diagnostics",
+  "robot": "q5",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/diagnostics_agg",
+  "rate_hz": 2.0,
+  "payload_fields": [
+    "data",
+    "has_diagnostic_message",
+    "source_topic",
+    "source_publisher_count",
+    "fresh"
+  ],
+  "mcp_tool": {
+    "name": "diagnostics",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Q5 标准诊断数组：保留诊断级别、名称、硬件 ID 和键值",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "info",
+            "start",
+            "stop"
+          ],
+          "description": "读取当前状态(info)或控制卡片生命周期(start/stop)"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "topic_out": [
+      {
+        "topic": "/{ns}/q5/diagnostics",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "phanthymotus-driver",
+    "path": "robotera/q5_bundle/diagnostics.py",
+    "class": "Plugin",
+    "commit": null
+  }
+}
