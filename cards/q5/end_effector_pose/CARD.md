@@ -9,7 +9,7 @@
 | 类型 | `sensor`(只读) |
 | 控制等级 | `HIGHLEVEL` |
 | 作者 | `huangchanglong` |
-| 状态 | `draft`(数据源已验证,驱动插件待实现) |
+| 状态 | `draft`(驱动插件已实现,待部署验证) |
 
 ## 能力
 
@@ -50,11 +50,11 @@
 ## 数据来源 / 实现位置
 
 - 源仓库:`robotera-q5-driver`(image: `robotera-q5`)
-- 文件:`end_effector_pose.py`  类:`Plugin`(**待实现**——数据源已验证,插件骨架见 impl/)
-- 依赖:`q5_sdk_client.py`(需扩展订阅 `/mobile_manipulator/end_effector_pose`)、`sensor_contract.py`
+- 文件:`end_effector_pose.py`  类:`Plugin`(**已实现**——自建 ROS2 Node 订阅 `/mobile_manipulator/end_effector_pose`)
+- 依赖:`sensor_contract.py`、`std_msgs/msg/Float32MultiArray`
 - 注册:`main.py` 插件聚合;MCP 端口 15794,注册到 Agent Core
 
 ## 状态说明
 
-- 数据源:`/mobile_manipulator/end_effector_pose` 真机已验证(⚠️ 有 1 个 publisher 但当前无数据流(仅移动操作模式发布,数据稀疏))。
-- 驱动插件:待实现并合入 robotera-q5-driver,再在 config.yaml 启用。
+- 数据源:`/mobile_manipulator/end_effector_pose` 真机已验证(⚠️ 有 publisher 但数据稀疏,MPC 未激活时无数据)。
+- 驱动插件:已实现,自建 Node 订阅 Float32MultiArray 消息。待部署到 q5-driver-huang 验证。

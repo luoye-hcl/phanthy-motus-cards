@@ -9,7 +9,7 @@
 | 类型 | `sensor`(只读) |
 | 控制等级 | `HIGHLEVEL` |
 | 作者 | `huangchanglong` |
-| 状态 | `draft`(数据源已验证,驱动插件待实现) |
+| 状态 | `draft`(驱动插件已实现,待部署验证) |
 
 ## 能力
 
@@ -52,11 +52,11 @@
 ## 数据来源 / 实现位置
 
 - 源仓库:`robotera-q5-driver`(image: `robotera-q5`)
-- 文件:`heartbeat.py`  类:`Plugin`(**待实现**——数据源已验证,插件骨架见 impl/)
-- 依赖:`q5_sdk_client.py`(需扩展订阅 `/system/heartbeat`)、`sensor_contract.py`
+- 文件:`heartbeat.py`  类:`Plugin`(**已实现**——自建 ROS2 Node 订阅 `/system/heartbeat`)
+- 依赖:`sensor_contract.py`、`std_msgs/msg/Header`
 - 注册:`main.py` 插件聚合;MCP 端口 15794,注册到 Agent Core
 
 ## 状态说明
 
-- 数据源:`/system/heartbeat` 真机已验证(✅ 有数据流(约 3.5Hz,动态启动管理器存活))。
-- 驱动插件:待实现并合入 robotera-q5-driver,再在 config.yaml 启用。
+- 数据源:`/system/heartbeat` 真机已验证(✅ 有数据流,约 3.5Hz)。
+- 驱动插件:已实现,自建 Node 订阅 Header 消息。待部署到 q5-driver-huang 验证。
