@@ -1,0 +1,51 @@
+{
+  "card": "linkcraft",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "MC",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {},
+  "mcp_tool": {
+    "name": "linkcraft",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "执行灵创动作资源（ExecuteActionResource）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "resource_key": {
+          "type": "string",
+          "description": "资源 key，来自 linkcraft_catalog 工具"
+        },
+        "resource_version": {
+          "type": "string",
+          "description": "资源版本"
+        },
+        "resource_type": {
+          "type": "string",
+          "enum": [
+            "BODY_MONTION",
+            "ARM_MONTION"
+          ],
+          "description": "vendor 原始拼写（保留 MONTION 拼写以匹配 meta JSON 字段）"
+        }
+      },
+      "required": [
+        "resource_key",
+        "resource_version",
+        "resource_type"
+      ]
+    },
+    "readOnly": false
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "card": "camera_rgb",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/agibot_x2/agibot_x2/camera_rgb",
+  "rate_hz": null,
+  "payload_fields": {
+    "jpeg": "压缩 JPEG 二进制流"
+  },
+  "mcp_tool": {
+    "name": "camera_rgb",
+    "type": "sensor",
+    "multiInstance": false,
+    "description": "前置 RGBD 相机彩色画面（压缩 JPEG）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/agibot_x2/agibot_x2/camera_rgb",
+        "format": "image/jpeg"
+      }
+    ],
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

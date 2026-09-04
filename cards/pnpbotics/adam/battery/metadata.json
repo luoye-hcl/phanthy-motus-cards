@@ -1,0 +1,22 @@
+{
+  "card": "battery",
+  "robot": "pnpbotics-adam",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "state/battery",
+  "rate_hz": 50,
+  "payload_fields": ["voltage", "current", "power", "wh_accumulated", "status"],
+  "mcp_tool": {
+    "name": "battery",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "读取 Adam 电池电压、电流、功率、累计电量和状态，用于判断机器人是否适合继续运动。电压单位为 V，电流单位为 A，功率单位为 W，累计电量单位为 Wh。",
+    "inputSchema": {"type": "object", "properties": {}},
+    "topic_out": [{"topic": "/{ns}/state/battery", "format": "data/json"}]
+  },
+  "source": {"repo": "phanthymotus-driver", "path": "pnpbotics/adam/device.py", "class": "StatePlugin", "commit": null}
+}

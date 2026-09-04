@@ -1,0 +1,38 @@
+{
+  "card": "map_get",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "processor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {
+    "map": "vendor 返回的已保存地图数据"
+  },
+  "mcp_tool": {
+    "name": "map_get",
+    "type": "processor",
+    "multiInstance": false,
+    "description": "按名称查询已保存地图（GetStoredMapByName）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "map_name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "map_name"
+      ]
+    },
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

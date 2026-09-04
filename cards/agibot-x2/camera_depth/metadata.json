@@ -1,0 +1,37 @@
+{
+  "card": "camera_depth",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/agibot_x2/agibot_x2/camera_depth",
+  "rate_hz": null,
+  "payload_fields": {
+    "depth_z16": "16-bit 深度图像流"
+  },
+  "mcp_tool": {
+    "name": "camera_depth",
+    "type": "sensor",
+    "multiInstance": false,
+    "description": "前置 RGBD 相机深度画面",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/agibot_x2/agibot_x2/camera_depth",
+        "format": "image/depth-z16"
+      }
+    ],
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

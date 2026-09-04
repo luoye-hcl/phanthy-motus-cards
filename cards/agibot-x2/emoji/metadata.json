@@ -1,0 +1,74 @@
+{
+  "card": "emoji",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "MC",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {},
+  "mcp_tool": {
+    "name": "emoji",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "播放屏幕表情（PlayEmoji）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "emotion": {
+          "type": "string",
+          "enum": [
+            "idle_blink",
+            "idle_calm_1",
+            "idle_calm_2",
+            "idle_game",
+            "idle_cute_1",
+            "idle_cute_2",
+            "idle_cute_3",
+            "idle_cute_4",
+            "eye_close",
+            "eye_open",
+            "eye_boring_1",
+            "eye_abnormal",
+            "eye_sleepy",
+            "eye_happy",
+            "eye_extremehappy_1",
+            "eye_extremehappy_2",
+            "eye_sad",
+            "eye_sympathy",
+            "eye_confuse",
+            "eye_shock",
+            "eye_actcute",
+            "eye_serious",
+            "eye_thinking",
+            "eye_angry",
+            "eye_extremeangry",
+            "eye_adore",
+            "eye_extremeadore",
+            "eye_charge"
+          ]
+        },
+        "loop": {
+          "type": "boolean",
+          "default": false
+        },
+        "priority": {
+          "type": "integer",
+          "default": 0
+        }
+      },
+      "required": [
+        "emotion"
+      ]
+    },
+    "readOnly": false
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

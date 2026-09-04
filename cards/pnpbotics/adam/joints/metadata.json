@@ -1,0 +1,22 @@
+{
+  "card": "joints",
+  "robot": "pnpbotics-adam",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "state/joints",
+  "rate_hz": 50,
+  "payload_fields": ["joints[].idx", "joints[].name", "joints[].q"],
+  "mcp_tool": {
+    "name": "joints",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "读取 Adam 全身关节实时位置，用于查看机器人当前姿态和 3D 骨架状态。位置单位为弧度(rad)。",
+    "inputSchema": {"type": "object", "properties": {}},
+    "topic_out": [{"topic": "/{ns}/state/joints", "format": "sensor/skeleton"}]
+  },
+  "source": {"repo": "phanthymotus-driver", "path": "pnpbotics/adam/device.py", "class": "StatePlugin", "commit": null}
+}

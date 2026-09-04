@@ -1,0 +1,22 @@
+{
+  "card": "loco",
+  "robot": "pnpbotics-adam",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": ["action", "mode", "vx", "vy", "vyaw", "motion_id", "action_id", "pitch", "roll", "yaw", "height", "enable"],
+  "mcp_tool": {
+    "name": "loco",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "通过 Adam gRPC 高层接口控制站立、行走、转向、预置动作、动态姿态和错误清除。运动操作前必须确认机器人处于可运动状态且周围无人。速度单位为 m/s，角速度单位为 rad/s，身高单位为 m。",
+    "inputSchema": {"type": "object", "required": ["action"], "properties": {"action": {"type": "string", "enum": ["set_mode", "move", "stop", "stand_motion", "stand_action", "stand_dynamic", "get_state", "list_actions", "clear_error", "carry_box"]}, "mode": {"type": "integer"}, "vx": {"type": "number"}, "vy": {"type": "number"}, "vyaw": {"type": "number"}, "motion_id": {"type": "integer"}, "action_id": {"type": "integer"}, "pitch": {"type": "number"}, "roll": {"type": "number"}, "yaw": {"type": "number"}, "height": {"type": "number", "minimum": 0.6, "maximum": 1.0}, "enable": {"type": "boolean"}}},
+    "topic_out": []
+  },
+  "source": {"repo": "phanthymotus-driver", "path": "pnpbotics/adam/device.py", "class": "LocoPlugin", "commit": null}
+}

@@ -1,0 +1,40 @@
+{
+  "card": "model",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "resource",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {
+    "urdf": "URDF 文本"
+  },
+  "mcp_tool": {
+    "name": "model",
+    "type": "resource",
+    "multiInstance": false,
+    "description": "返回配置的末端执行器变体（fist/hand/ultra）对应的 URDF",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "variant": {
+          "type": "string",
+          "enum": [
+            "fist",
+            "hand",
+            "ultra"
+          ]
+        }
+      }
+    },
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}
