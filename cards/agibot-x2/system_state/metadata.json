@@ -1,0 +1,32 @@
+{
+  "card": "system_state",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {
+    "cur_state": "当前系统状态",
+    "status": "vendor 状态详情"
+  },
+  "mcp_tool": {
+    "name": "system_state",
+    "type": "sensor",
+    "multiInstance": false,
+    "description": "查询系统状态机当前状态（GetSystemState）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

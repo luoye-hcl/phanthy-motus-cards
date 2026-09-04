@@ -1,0 +1,69 @@
+{
+  "card": "pmu_led",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "MC",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {},
+  "mcp_tool": {
+    "name": "pmu_led",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "设置 PMU 灯带模式与颜色（SetPmuLed）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "constant",
+            "breath",
+            "flash",
+            "flow"
+          ],
+          "default": "constant"
+        },
+        "r": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255,
+          "default": 0
+        },
+        "g": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255,
+          "default": 0
+        },
+        "b": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255,
+          "default": 0
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 100,
+          "description": "灯带控制优先级 (0-100)；实测除 100（最高）外的任何值都被 PMU固件拒绝（返回 status_code 4132），推测系统默认状态灯以更高优先级占用了灯带，只有最高优先级请求才能覆盖。"
+        },
+        "reset_priority": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "readOnly": false
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

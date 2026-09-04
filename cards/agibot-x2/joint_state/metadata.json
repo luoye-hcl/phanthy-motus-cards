@@ -1,0 +1,34 @@
+{
+  "card": "joint_state",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {
+    "leg": "腿部关节数组",
+    "waist": "腰部关节数组",
+    "arm": "手臂关节数组",
+    "head": "头部关节数组"
+  },
+  "mcp_tool": {
+    "name": "joint_state",
+    "type": "sensor",
+    "multiInstance": false,
+    "description": "查询全身关节状态：leg/waist/arm/head（GetAllJointState）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "card": "linkcraft_catalog",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {
+    "resources": "可用动作资源数组"
+  },
+  "mcp_tool": {
+    "name": "linkcraft_catalog",
+    "type": "sensor",
+    "multiInstance": false,
+    "description": "查询机上可用的灵创动作资源列表（GetRobotResources）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

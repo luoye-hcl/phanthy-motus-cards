@@ -1,0 +1,72 @@
+{
+  "card": "locomotion",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "MC",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {},
+  "mcp_tool": {
+    "name": "locomotion",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "MC 行走速度控制：需先 register 输入源再 set_velocity；另外机器人 FSM 必须已处于 locomotion_default/run_default 模式（用 mc_mode 切换），站立(stand_default)等模式下 register 会成功但 set_velocity 不会驱动实际行走",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "register",
+            "set_velocity",
+            "disable"
+          ],
+          "description": "Action to perform"
+        },
+        "forward": {
+          "type": "number",
+          "description": "前进速度 m/s，+前进/-后退"
+        },
+        "lateral": {
+          "type": "number",
+          "description": "侧移速度 m/s，+左移/-右移"
+        },
+        "angular": {
+          "type": "number",
+          "description": "转向角速度 rad/s，+左转/-右转"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "x-action-params": {
+        "register": {
+          "params": [],
+          "description": "以本驱动名义注册一个 MC 输入源（SetMcInputSource ADD）"
+        },
+        "set_velocity": {
+          "params": [
+            "forward",
+            "lateral",
+            "angular"
+          ],
+          "description": "发布行走速度指令"
+        },
+        "disable": {
+          "params": [],
+          "description": "禁用本驱动的输入源"
+        }
+      }
+    },
+    "readOnly": false
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

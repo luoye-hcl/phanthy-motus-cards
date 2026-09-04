@@ -1,0 +1,37 @@
+{
+  "card": "slam_pose",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/agibot_x2/agibot_x2/slam_odom",
+  "rate_hz": null,
+  "payload_fields": {
+    "odom": "Odometry JSON 化载荷"
+  },
+  "mcp_tool": {
+    "name": "slam_pose",
+    "type": "sensor",
+    "multiInstance": false,
+    "description": "SLAM 激光里程计位姿（/slam/lidar_odom）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/agibot_x2/agibot_x2/slam_odom",
+        "format": "data/json"
+      }
+    ],
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

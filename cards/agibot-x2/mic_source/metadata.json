@@ -1,0 +1,60 @@
+{
+  "card": "mic_source",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "MC",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {},
+  "mcp_tool": {
+    "name": "mic_source",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "切换内置/外置麦克风来源（SetMicSourceRequest）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "set",
+            "get"
+          ],
+          "description": "Action to perform"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "internal",
+            "external"
+          ]
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "x-action-params": {
+        "set": {
+          "params": [
+            "source"
+          ],
+          "description": "设置麦克风来源"
+        },
+        "get": {
+          "params": [],
+          "description": "查询当前麦克风来源"
+        }
+      }
+    },
+    "readOnly": false
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

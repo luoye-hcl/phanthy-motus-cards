@@ -1,0 +1,37 @@
+{
+  "card": "lidar",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/agibot_x2/agibot_x2/lidar",
+  "rate_hz": null,
+  "payload_fields": {
+    "pointcloud": "PointCloud2 二进制流"
+  },
+  "mcp_tool": {
+    "name": "lidar",
+    "type": "sensor",
+    "multiInstance": false,
+    "description": "胸前激光雷达点云",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/agibot_x2/agibot_x2/lidar",
+        "format": "sensor/pointcloud"
+      }
+    ],
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "card": "tts",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "MC",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {},
+  "mcp_tool": {
+    "name": "tts",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "文字转语音播报（PlayTts）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "background",
+            "service",
+            "mission",
+            "interaction",
+            "system",
+            "warning",
+            "safety"
+          ],
+          "default": "interaction"
+        },
+        "interrupt": {
+          "type": "boolean",
+          "default": false,
+          "description": "是否打断同等优先级播报"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "readOnly": false
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

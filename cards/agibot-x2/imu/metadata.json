@@ -1,0 +1,38 @@
+{
+  "card": "imu",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "/agibot_x2/agibot_x2/imu",
+  "rate_hz": null,
+  "payload_fields": {
+    "chest": "胸部 Imu JSON",
+    "torso": "躯干 Imu JSON"
+  },
+  "mcp_tool": {
+    "name": "imu",
+    "type": "sensor",
+    "multiInstance": false,
+    "description": "胸部+躯干 IMU 合并数据流",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/agibot_x2/agibot_x2/imu",
+        "format": "data/json"
+      }
+    ],
+    "readOnly": true
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

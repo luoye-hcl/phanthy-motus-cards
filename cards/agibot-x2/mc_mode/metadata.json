@@ -1,0 +1,131 @@
+{
+  "card": "mc_mode",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "MC",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {},
+  "mcp_tool": {
+    "name": "mc_mode",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "切换 MC 运控状态机模式（SetMcAction）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "passive_default",
+            "soft_emergency_stop",
+            "damping_default",
+            "zero_torque_default",
+            "joint_default",
+            "joint_freeze",
+            "stand_default",
+            "stand_body_control",
+            "locomotion_default",
+            "run_default",
+            "locomotion_step",
+            "vr_remote_controller",
+            "sit_down_default",
+            "crouch_down_default",
+            "lie_down_default",
+            "stand_up_default",
+            "ascend_stairs",
+            "descend_stairs"
+          ],
+          "description": "Action to perform"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "x-action-params": {
+        "passive_default": {
+          "params": [],
+          "description": "切换到 passive_default 模式"
+        },
+        "soft_emergency_stop": {
+          "params": [],
+          "description": "切换到 soft_emergency_stop 模式"
+        },
+        "damping_default": {
+          "params": [],
+          "description": "切换到 damping_default 模式"
+        },
+        "zero_torque_default": {
+          "params": [],
+          "description": "切换到 zero_torque_default 模式"
+        },
+        "joint_default": {
+          "params": [],
+          "description": "切换到 joint_default 模式"
+        },
+        "joint_freeze": {
+          "params": [],
+          "description": "切换到 joint_freeze 模式"
+        },
+        "stand_default": {
+          "params": [],
+          "description": "切换到 stand_default 模式"
+        },
+        "stand_body_control": {
+          "params": [],
+          "description": "切换到 stand_body_control 模式"
+        },
+        "locomotion_default": {
+          "params": [],
+          "description": "切换到 locomotion_default 模式"
+        },
+        "run_default": {
+          "params": [],
+          "description": "切换到 run_default 模式"
+        },
+        "locomotion_step": {
+          "params": [],
+          "description": "切换到 locomotion_step 模式"
+        },
+        "vr_remote_controller": {
+          "params": [],
+          "description": "切换到 vr_remote_controller 模式"
+        },
+        "sit_down_default": {
+          "params": [],
+          "description": "切换到 sit_down_default 模式"
+        },
+        "crouch_down_default": {
+          "params": [],
+          "description": "切换到 crouch_down_default 模式"
+        },
+        "lie_down_default": {
+          "params": [],
+          "description": "切换到 lie_down_default 模式"
+        },
+        "stand_up_default": {
+          "params": [],
+          "description": "切换到 stand_up_default 模式"
+        },
+        "ascend_stairs": {
+          "params": [],
+          "description": "切换到 ascend_stairs 模式"
+        },
+        "descend_stairs": {
+          "params": [],
+          "description": "切换到 descend_stairs 模式"
+        }
+      }
+    },
+    "readOnly": false
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

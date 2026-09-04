@@ -1,0 +1,79 @@
+{
+  "card": "joint_command",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "MC",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {},
+  "mcp_tool": {
+    "name": "joint_command",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "按 leg/waist/arm/head 分组下发关节位置/速度/力矩/刚度/阻尼指令",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "type": "string",
+          "enum": [
+            "leg",
+            "waist",
+            "arm",
+            "head"
+          ],
+          "description": "关节分组"
+        },
+        "joints": {
+          "type": "array",
+          "description": "关节指令列表",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "position": {
+                "type": "number"
+              },
+              "velocity": {
+                "type": "number",
+                "default": 0
+              },
+              "effort": {
+                "type": "number",
+                "default": 0
+              },
+              "stiffness": {
+                "type": "number",
+                "default": 0
+              },
+              "damping": {
+                "type": "number",
+                "default": 0
+              }
+            },
+            "required": [
+              "name",
+              "position"
+            ]
+          }
+        }
+      },
+      "required": [
+        "area",
+        "joints"
+      ]
+    },
+    "readOnly": false
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}

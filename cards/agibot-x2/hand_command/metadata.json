@@ -1,0 +1,78 @@
+{
+  "card": "hand_command",
+  "robot": "agibot-x2",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "MC",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": {},
+  "mcp_tool": {
+    "name": "hand_command",
+    "type": "actuator",
+    "multiInstance": false,
+    "description": "手部指令：张开/握拳/自定义手指位置（HandCommandArray）",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "open",
+            "close",
+            "set_positions",
+            "get_state"
+          ],
+          "description": "Action to perform"
+        },
+        "left": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "左手各手指位置 [thumb, index, middle, ring, little]"
+        },
+        "right": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "右手各手指位置 [thumb, index, middle, ring, little]"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "x-action-params": {
+        "open": {
+          "params": [],
+          "description": "张开手掌（左右手可分别指定）"
+        },
+        "close": {
+          "params": [],
+          "description": "握拳（左右手可分别指定）"
+        },
+        "set_positions": {
+          "params": [
+            "left",
+            "right"
+          ],
+          "description": "自定义左右手各手指的位置数组"
+        },
+        "get_state": {
+          "params": [],
+          "description": "查询手部关节最新状态快照"
+        }
+      }
+    },
+    "readOnly": false
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "agibot/x2/device.py",
+    "class": "AimDK X2 driver plugins",
+    "commit": null
+  }
+}
