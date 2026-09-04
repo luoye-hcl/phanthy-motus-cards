@@ -1,0 +1,22 @@
+{
+  "card": "imu",
+  "robot": "pnpbotics-adam",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "state/imu",
+  "rate_hz": 50,
+  "payload_fields": ["quaternion", "gyroscope", "accelerometer", "ypr", "temperature"],
+  "mcp_tool": {
+    "name": "imu",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "读取 Adam IMU 姿态、角速度、加速度和温度，用于判断机身姿态与运动状态。角速度单位为 rad/s，加速度单位为 m/s²，温度单位为 °C。",
+    "inputSchema": {"type": "object", "properties": {}},
+    "topic_out": [{"topic": "/{ns}/state/imu", "format": "data/json"}]
+  },
+  "source": {"repo": "phanthymotus-driver", "path": "pnpbotics/adam/device.py", "class": "StatePlugin", "commit": null}
+}
