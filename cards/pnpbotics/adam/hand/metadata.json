@@ -1,0 +1,22 @@
+{
+  "card": "hand",
+  "robot": "pnpbotics-adam",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "rt/handcmd",
+  "rate_hz": null,
+  "payload_fields": ["left[6]", "right[6]"],
+  "mcp_tool": {
+    "name": "hand",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "控制 Adam 双手 12 个手指执行器。PND 手位置范围为 0 到 1000，0 表示弯曲/闭合，1000 表示伸直/张开；发送动作前确认手部周围没有障碍物。",
+    "inputSchema": {"type": "object", "required": ["action"], "properties": {"action": {"type": "string", "enum": ["open", "close", "set_fingers", "get_state"]}, "left": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"type": "integer", "minimum": 0, "maximum": 1000}}, "right": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"type": "integer", "minimum": 0, "maximum": 1000}}}},
+    "topic_out": [{"topic": "/{ns}/state/hand", "format": "data/json"}]
+  },
+  "source": {"repo": "phanthymotus-driver", "path": "pnpbotics/adam/device.py", "class": "HandPlugin", "commit": null}
+}
