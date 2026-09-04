@@ -1,0 +1,22 @@
+{
+  "card": "arm",
+  "robot": "pnpbotics-adam",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "joint_states",
+  "rate_hz": 100,
+  "payload_fields": ["joints", "height"],
+  "mcp_tool": {
+    "name": "arm",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "控制 Adam 腰部、双臂、手腕和机身高度的实时姿态。仅在机器人站立且已进入上肢实时接收模式时使用；关节角度单位为 rad，机身高度范围为 0.6 到 1.0 m。",
+    "inputSchema": {"type": "object", "required": ["action"], "properties": {"action": {"type": "string", "enum": ["enable", "disable", "set_joints", "set_height", "zero"]}, "joints": {"type": "object"}, "height": {"type": "number", "minimum": 0.6, "maximum": 1.0}}},
+    "topic_out": [{"topic": "/{ns}/joint_states", "format": "sensor_msgs/JointState"}]
+  },
+  "source": {"repo": "phanthymotus-driver", "path": "pnpbotics/adam/device.py", "class": "ArmPlugin", "commit": null}
+}

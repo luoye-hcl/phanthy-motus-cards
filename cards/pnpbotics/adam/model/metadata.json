@@ -1,0 +1,14 @@
+{
+  "card": "model",
+  "robot": "pnpbotics-adam",
+  "author": "huangchanglong",
+  "category": "system",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": null,
+  "rate_hz": null,
+  "payload_fields": ["urdf"],
+  "mcp_tool": {"name": "model", "type": "resource", "multiInstance": false, "readOnly": true, "description": "提供 Adam 当前机型 URDF 模型，用于画布 3D 可视化。", "inputSchema": {"type": "object", "properties": {}}, "topic_out": []},
+  "source": {"repo": "phanthymotus-driver", "path": "pnpbotics/adam/device.py", "class": "ModelPlugin", "commit": null}
+}
