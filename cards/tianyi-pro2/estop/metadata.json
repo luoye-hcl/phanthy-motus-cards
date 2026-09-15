@@ -1,0 +1,41 @@
+{
+  "card": "estop",
+  "robot": "tianyi-pro2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.1.0",
+  "status": "draft",
+  "topic": "state/estop",
+  "rate_hz": 19.2,
+  "payload_fields": {
+    "is_estop": "急停按键是否被按下",
+    "is_remote_estop": "软急停是否被按下",
+    "is_power_on": "电源是否正常供电",
+    "timestamp_ms": "聚合输出时间戳(ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "estop",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "天轶2.0 Pro 急停/软急停/电源按键状态(19.2Hz),含累计工作时间。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/state/estop",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "<待建 tianyi-pro2-driver>",
+    "path": "plugins/estop.py",
+    "class": "EstopStatePlugin",
+    "commit": null
+  }
+}

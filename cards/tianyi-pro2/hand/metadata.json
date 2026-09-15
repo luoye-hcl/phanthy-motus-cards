@@ -1,0 +1,48 @@
+{
+  "card": "hand",
+  "robot": "tianyi-pro2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.1.0",
+  "status": "draft",
+  "topic": "state/hand",
+  "rate_hz": 24.8,
+  "payload_fields": {
+    "left.fingers[].id": "手指ID(1=小指,2=无名指,3=中指,4=食指,5=拇指弯曲,6=拇指旋转)",
+    "left.fingers[].name": "手指英文名(little/ring/middle/fore/thumb_bend/thumb_rot)",
+    "left.fingers[].position": "手指位置(张开百分比,0-1)",
+    "left.fingers[].velocity": "手指速度(百分比,0-1)",
+    "left.fingers[].effort": "手指力(百分比,0-1)",
+    "right.fingers[].id": "右手手指ID(定义同左手)",
+    "right.fingers[].name": "右手手指英文名",
+    "right.fingers[].position": "右手手指位置(百分比,0-1)",
+    "right.fingers[].velocity": "右手手指速度(百分比,0-1)",
+    "right.fingers[].effort": "右手手指力(百分比,0-1)",
+    "timestamp_ms": "聚合输出时间戳(ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "hand",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "天轶2.0 Pro 仿生手状态(左右手各6 DOF:位置/速度/力,均为百分比0-1)。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/state/hand",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "<待建 tianyi-pro2-driver>",
+    "path": "plugins/hand.py",
+    "class": "HandStatePlugin",
+    "commit": null
+  }
+}

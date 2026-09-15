@@ -1,0 +1,50 @@
+{
+  "card": "force_torque",
+  "robot": "tianyi-pro2",
+  "author": "huangchanglong",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.1.0",
+  "status": "draft",
+  "topic": "state/force_torque",
+  "rate_hz": 100,
+  "payload_fields": {
+    "left.force.x": "左臂X方向力(N,前方为正)",
+    "left.force.y": "左臂Y方向力(N,左方为正)",
+    "left.force.z": "左臂Z方向力(N,上方为正)",
+    "left.torque.x": "左臂绕X轴力矩(N·m,Roll)",
+    "left.torque.y": "左臂绕Y轴力矩(N·m,Pitch)",
+    "left.torque.z": "左臂绕Z轴力矩(N·m,Yaw)",
+    "right.force.x": "右臂X方向力(N,前方为正)",
+    "right.force.y": "右臂Y方向力(N,左方为正)",
+    "right.force.z": "右臂Z方向力(N,上方为正)",
+    "right.torque.x": "右臂绕X轴力矩(N·m,Roll)",
+    "right.torque.y": "右臂绕Y轴力矩(N·m,Pitch)",
+    "right.torque.z": "右臂绕Z轴力矩(N·m,Yaw)",
+    "timestamp_ms": "聚合输出时间戳(ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "force_torque",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "天轶2.0 Pro 双臂六维力/力矩(100Hz,坐标系:X前/Y左/Z上)。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    },
+    "topic_out": [
+      {
+        "topic": "/state/force_torque",
+        "format": "data/json"
+      }
+    ]
+  },
+  "source": {
+    "repo": "<待建 tianyi-pro2-driver>",
+    "path": "plugins/force_torque.py",
+    "class": "ForceTorqueStatePlugin",
+    "commit": null
+  }
+}
