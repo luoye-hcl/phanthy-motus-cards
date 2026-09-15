@@ -8,7 +8,7 @@
   "status": "draft",
   "topic": "joint_states",
   "rate_hz": 100,
-  "payload_fields": ["action", "side"],
+  "payload_fields": ["action", "side", "confirm"],
   "mcp_tool": {
     "name": "arm_gesture",
     "type": "actuator",
@@ -23,10 +23,12 @@
         "side": {
           "type": "string", "enum": ["left", "right"],
           "oneOf": [{"const": "left", "title": "左侧"}, {"const": "right", "title": "右侧"}]
-        }
+        },
+        "confirm": {"type": "boolean", "description": "现场确认站立、实时接收模式和周围安全"}
       },
+      "x-is-dangerous": true,
       "x-action-params": {
-        "raise_hand": {"params": ["side"], "description": "单侧举手"},
+        "raise_hand": {"params": ["side", "confirm"], "description": "确认站立和实时接收模式后单侧举手"},
         "stop": {"params": [], "description": "停止上肢目标发布"}
       }
     },

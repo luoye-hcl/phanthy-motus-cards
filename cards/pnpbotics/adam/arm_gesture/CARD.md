@@ -23,6 +23,7 @@
 - MCP 工具：`arm_gesture`
 - 动作：`raise_hand`、`stop`
 - 侧别：`side=left/right`
+- 确认：`raise_hand` 必须传 `confirm=true`；该值表示现场人员已核实站立、实时接收模式和活动范围安全，driver 无法自行确认这些条件
 - 共享控制：基础 `arm` 的 ROS2 `JointState` 发布器
 
 ## 数据来源
