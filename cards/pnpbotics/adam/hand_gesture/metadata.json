@@ -1,0 +1,49 @@
+{
+  "card": "hand_gesture",
+  "robot": "pnpbotics-adam",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "rt/handcmd",
+  "rate_hz": 400,
+  "payload_fields": ["action", "side"],
+  "mcp_tool": {
+    "name": "hand_gesture",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "通过共享的 hand 控制线程执行 Adam 单手语义手势；另一只手保持当前目标。",
+    "inputSchema": {
+      "type": "object",
+      "required": ["action"],
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["thumbs_up", "wave_open", "handshake", "point", "victory", "rock", "stop"]
+        },
+        "side": {
+          "type": "string", "enum": ["left", "right"],
+          "oneOf": [{"const": "left", "title": "左手"}, {"const": "right", "title": "右手"}]
+        }
+      },
+      "x-action-params": {
+        "thumbs_up": {"params": ["side"], "description": "单手点赞"},
+        "wave_open": {"params": ["side"], "description": "单手张掌"},
+        "handshake": {"params": ["side"], "description": "单手握手手型"},
+        "point": {"params": ["side"], "description": "单手指向"},
+        "victory": {"params": ["side"], "description": "单手 V 手势"},
+        "rock": {"params": ["side"], "description": "单手摇滚手势"},
+        "stop": {"params": [], "description": "停止发送手部目标"}
+      }
+    },
+    "topic_out": []
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "pndbotics/adam/device.py",
+    "class": "HandGesturePlugin",
+    "commit": null
+  }
+}

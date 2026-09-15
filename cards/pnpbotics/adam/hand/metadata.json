@@ -4,7 +4,7 @@
   "author": "huangchanglong",
   "category": "actuator",
   "control_level": "HIGHLEVEL",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "status": "draft",
   "topic": "rt/handcmd",
   "rate_hz": 400,
@@ -14,14 +14,14 @@
     "type": "actuator",
     "multiInstance": false,
     "readOnly": false,
-    "description": "通过 DDS rt/handcmd 控制 Adam 双手 12 个通道，支持单手点赞、张掌、握手手型、指向、V 手势和摇滚手势。位置范围为 0 到 1000，0 表示闭合，1000 表示张开。",
+    "description": "通过 DDS rt/handcmd 控制 Adam 双手 12 个通道。位置范围为 0 到 1000，0 表示闭合，1000 表示张开。",
     "inputSchema": {
       "type": "object",
       "required": ["action"],
       "properties": {
         "action": {
           "type": "string",
-          "enum": ["open", "close", "thumbs_up", "wave_open", "handshake", "point", "victory", "rock", "set_fingers", "start", "stop", "info", "get_state"]
+          "enum": ["open", "close", "set_fingers", "start", "stop", "info", "get_state"]
         },
         "side": {
           "type": "string",
@@ -31,7 +31,7 @@
             {"const": "left", "title": "左手"},
             {"const": "right", "title": "右手"}
           ],
-          "description": "选择执行语义动作或设置通道的手"
+          "description": "选择要设置通道的手"
         },
         "channel": {
           "type": "string",
@@ -58,12 +58,6 @@
     "x-action-params": {
       "open": {"params": [], "description": "双手应用已配置的张开姿势"},
       "close": {"params": [], "description": "双手应用已配置的闭合姿势"},
-      "thumbs_up": {"params": ["side"], "description": "指定手四指合拢、拇指张开"},
-      "wave_open": {"params": ["side"], "description": "指定手张开，可与 arm 举手组合"},
-      "handshake": {"params": ["side"], "description": "指定手形成握手手型"},
-      "point": {"params": ["side"], "description": "指定手食指伸出，其余手指收拢"},
-      "victory": {"params": ["side"], "description": "指定手食指和中指伸出"},
-      "rock": {"params": ["side"], "description": "指定手食指和小指伸出"},
       "set_fingers": {"params": ["side", "channel", "value"], "description": "设置指定手的单个电机通道"},
       "start": {"params": [], "description": "启用手部控制发布线程"},
       "stop": {"params": [], "description": "停止发送新的手部目标"},

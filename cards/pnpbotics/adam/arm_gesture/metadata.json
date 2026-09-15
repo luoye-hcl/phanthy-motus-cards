@@ -1,0 +1,41 @@
+{
+  "card": "arm_gesture",
+  "robot": "pnpbotics-adam",
+  "author": "huangchanglong",
+  "category": "actuator",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "draft",
+  "topic": "joint_states",
+  "rate_hz": 100,
+  "payload_fields": ["action", "side"],
+  "mcp_tool": {
+    "name": "arm_gesture",
+    "type": "actuator",
+    "multiInstance": false,
+    "readOnly": false,
+    "description": "使用 Adam 官方 SDK 单侧举手姿势；仅在机器人站立并进入上肢实时接收模式后执行。",
+    "inputSchema": {
+      "type": "object",
+      "required": ["action"],
+      "properties": {
+        "action": {"type": "string", "enum": ["raise_hand", "stop"]},
+        "side": {
+          "type": "string", "enum": ["left", "right"],
+          "oneOf": [{"const": "left", "title": "左侧"}, {"const": "right", "title": "右侧"}]
+        }
+      },
+      "x-action-params": {
+        "raise_hand": {"params": ["side"], "description": "单侧举手"},
+        "stop": {"params": [], "description": "停止上肢目标发布"}
+      }
+    },
+    "topic_out": []
+  },
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "pndbotics/adam/device.py",
+    "class": "ArmGesturePlugin",
+    "commit": null
+  }
+}
