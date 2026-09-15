@@ -4,19 +4,80 @@
   "author": "huangchanglong",
   "category": "actuator",
   "control_level": "HIGHLEVEL",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "draft",
   "topic": "rt/handcmd",
-  "rate_hz": null,
-  "payload_fields": ["left[6]", "right[6]"],
+  "rate_hz": 400,
+  "payload_fields": ["action", "side", "channel", "value"],
   "mcp_tool": {
     "name": "hand",
     "type": "actuator",
     "multiInstance": false,
     "readOnly": false,
-    "description": "控制 Adam 双手 12 个手指执行器。PND 手位置范围为 0 到 1000，0 表示弯曲/闭合，1000 表示伸直/张开；发送动作前确认手部周围没有障碍物。",
-    "inputSchema": {"type": "object", "required": ["action"], "properties": {"action": {"type": "string", "enum": ["open", "close", "set_fingers", "get_state"]}, "left": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"type": "integer", "minimum": 0, "maximum": 1000}}, "right": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"type": "integer", "minimum": 0, "maximum": 1000}}}},
-    "topic_out": [{"topic": "/{ns}/state/hand", "format": "data/json"}]
+    "description": "通过 DDS rt/handcmd 控制 Adam 双手 12 个通道，支持单手点赞、张掌、握手手型、指向、V 手势和摇滚手势。位置范围为 0 到 1000，0 表示闭合，1000 表示张开。",
+    "inputSchema": {
+      "type": "object",
+      "required": ["action"],
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["open", "close", "thumbs_up", "wave_open", "handshake", "point", "victory", "rock", "set_fingers", "start", "stop", "info", "get_state"]
+        },
+        "side": {
+          "type": "string",
+          "title": "手",
+          "enum": ["left", "right"],
+          "oneOf": [
+            {"const": "left", "title": "左手"},
+            {"const": "right", "title": "右手"}
+          ],
+          "description": "选择执行语义动作或设置通道的手"
+        },
+        "channel": {
+          "type": "string",
+          "title": "通道",
+          "enum": ["pinky", "ring", "middle", "index", "thumb_flex", "thumb_rotate"],
+          "oneOf": [
+            {"const": "pinky", "title": "小指"},
+            {"const": "ring", "title": "无名指"},
+            {"const": "middle", "title": "中指"},
+            {"const": "index", "title": "食指"},
+            {"const": "thumb_flex", "title": "拇指屈伸"},
+            {"const": "thumb_rotate", "title": "拇指旋转"}
+          ]
+        },
+        "value": {
+          "type": "integer",
+          "title": "目标值",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "通道目标位置，0 为闭合，1000 为张开"
+        }
+      }
+    },
+    "x-action-params": {
+      "open": {"params": [], "description": "双手应用已配置的张开姿势"},
+      "close": {"params": [], "description": "双手应用已配置的闭合姿势"},
+      "thumbs_up": {"params": ["side"], "description": "指定手四指合拢、拇指张开"},
+      "wave_open": {"params": ["side"], "description": "指定手张开，可与 arm 举手组合"},
+      "handshake": {"params": ["side"], "description": "指定手形成握手手型"},
+      "point": {"params": ["side"], "description": "指定手食指伸出，其余手指收拢"},
+      "victory": {"params": ["side"], "description": "指定手食指和中指伸出"},
+      "rock": {"params": ["side"], "description": "指定手食指和小指伸出"},
+      "set_fingers": {"params": ["side", "channel", "value"], "description": "设置指定手的单个电机通道"},
+      "start": {"params": [], "description": "启用手部控制发布线程"},
+      "stop": {"params": [], "description": "停止发送新的手部目标"},
+      "info": {"params": [], "description": "读取手部卡配置和运行状态"},
+      "get_state": {"params": [], "description": "读取左右手全部通道当前位置"}
+    },
+    "topic_out": [
+      {"topic": "/{ns}/state/hand", "format": "data/json"}
+    ]
   },
-  "source": {"repo": "phanthymotus-driver", "path": "pnpbotics/adam/device.py", "class": "HandPlugin", "commit": null}
+  "source": {
+    "repo": "4paradigm/phanthymotus-driver",
+    "path": "pndbotics/adam/device.py",
+    "class": "HandPlugin",
+    "commit": "bc12e3f"
+  }
 }
