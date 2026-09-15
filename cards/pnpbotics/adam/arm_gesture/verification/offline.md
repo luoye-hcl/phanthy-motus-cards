@@ -9,7 +9,8 @@
 
 ## 实机只读检查
 
-- [x] `release.260915.a886991` 实机 MCP `tools/list` 注册 `arm_gesture` actuator；`info` 为 `idle`。该镜像尚无 `confirm` 门控，需在新镜像中重验
+- [x] `release.260915.2135ca3` 实机 MCP `tools/list` 注册 `arm_gesture` actuator；schema 包含 `confirm` 和 `x-is-dangerous`，`info` 为 `idle`
+- [x] 未传 `confirm=true` 的左侧 `raise_hand` 返回 `PRECONDITION_FAILED`，调用前后基础 `arm` 均为 `idle`，未启动目标发布
 - [ ] 画布显示独立 `arm_gesture` 卡片及参数
 
 ## 实机动作检查

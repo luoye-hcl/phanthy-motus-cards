@@ -8,7 +8,7 @@
 
 ## 实机只读检查
 
-- [x] `release.260915.a886991` 实机 MCP `tools/list` 注册 `hand_gesture` actuator；`info` 可用，DDS publisher 与反馈 reader 均可用
+- [x] `release.260915.2135ca3` 实机 MCP `tools/list` 注册 `hand_gesture` actuator；`info` 为 `idle`，DDS publisher、worker 与新鲜反馈 reader 均可用
 - [ ] 画布显示独立 `hand_gesture` 卡片及参数
 
 ## 实机动作检查
