@@ -20,3 +20,20 @@
 - [ ] `CHANGELOG.md` 有本次版本条目,`version` 已递增
 - [ ] 已更新 README 收录表(新增卡)
 - [ ] 无明文口令/密钥/无关大文件
+
+## 网站验证(升 accepted 必填;未达 accepted 请在标题加 `[pending-web]`,审核不予合并)
+
+- preflight 输出(粘关键几行):
+  ```
+  <python3 tools/preflight.py cards/<robot>/<card> --host <ip> 的输出>
+  ```
+- 卡可见截图:<链接>
+- 功能实现截图(数据流/执行效果):<链接>
+- 实机真实样本:见 `verification/accepted.md`
+- MT 验收人 / 日期 / 结论:<...>
+
+## 自检清单
+
+- [ ] `preflight.py` 全绿
+- [ ] accepted 卡:网站证据 + MT 验收记录齐(见 docs/WEBSITE_VERIFICATION.md)
+- [ ] 未达 accepted 已在 PR 标题加 `[pending-web]`

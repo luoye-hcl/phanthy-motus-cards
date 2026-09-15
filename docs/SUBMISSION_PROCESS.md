@@ -31,9 +31,13 @@
    git commit -m "[<机器人>] add <卡片名>: <一句话>"
    git push -u origin add/<机器人>-<卡片名>
    ```
-5. **开 PR**(用 PR 模板),标题 `[<机器人>] add <卡片名>: <一句话>`。
+5. **开 PR**(用 PR 模板),标题 `[<机器人>] add <卡片名>: <一句话>`;**未达 accepted 时标题加 `[pending-web]`**。
 6. **更新 README 收录表**(加一行)——可在同 PR 里改。
-7. 审核人对照提交标准检查 → 通过后合并到 main。
+7. **网站验证 + MT 验收(升 accepted 的必经)**:
+   - 跑 `python3 tools/preflight.py cards/<机器人>/<卡片名> --host <驱动IP>`,全绿。
+   - 按 [WEBSITE_VERIFICATION.md](WEBSITE_VERIFICATION.md) 在 core 网站验证功能(看得到 / 点执行 / 看数据流)。
+   - 请 MT 验收;齐证据写入 `verification/accepted.md`,`metadata.status→accepted`。
+8. 审核人对照提交标准检查 → **确认 `status==accepted` 且证据齐**后合并到 main。**offline-green 的 PR 不合并**(可开着协作)。
 
 ## B. 更新一张已有卡(**每次更新必写明**)
 
