@@ -12,7 +12,8 @@
 - [x] Adam Jetson 运行镜像 `release.260914.bc12e3f`
 - [x] MCP `tools/list` 注册 `hand` actuator
 - [x] MCP schema 暴露全部动作、侧别和通道参数
-- [x] `rt/handstate` 已并入 43 项 joints 状态流
+- [x] `joints` 状态流仅包含 31 个 URDF 身体关节
+- [x] `rt/handstate` 通过独立 `hands` / `hand_state` 数据流暴露 12 个硬件位置通道
 - [ ] MCP `get_state` 返回左右手 6 个通道当前位置
 
 ## 实机动作检查
