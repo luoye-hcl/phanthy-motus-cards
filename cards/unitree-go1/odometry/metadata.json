@@ -1,0 +1,40 @@
+{
+  "card": "odometry",
+  "robot": "unitree-go1",
+  "author": "luoye-hcl",
+  "category": "sensor",
+  "control_level": "HIGHLEVEL",
+  "version": "1.0.0",
+  "status": "offline-green",
+  "verified_readonly_date": "2026-07-13",
+  "topic": "state/odometry",
+  "rate_hz": 5.0,
+  "actions": {
+    "read": "读取当前里程(默认)",
+    "reset_origin": "把当前位置设为新起点(经 MCP 调用,UI 不出按钮)"
+  },
+  "payload_fields": {
+    "position_m": "当前世界系位置 [x,y,z] (m)",
+    "yaw_rad": "当前航向角 (rad)",
+    "total_distance_m": "累计总路程 (m,跳变丢弃)",
+    "origin_m": "起点 [x,y] (m)",
+    "displacement_m": "相对起点位移 {dx, dy, distance} (m)",
+    "offline": "后端是否离线 (bool)",
+    "timestamp_ms": "采集时间戳 (ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "odometry",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Go1 里程计 —— 当前 position/yaw、累计总路程 total_distance_m、相对起点位移 displacement(read 读取;reset_origin 重置起点)。让高层规划知道'走了多远/在哪'。",
+    "inputSchema": { "type": "object", "properties": {} },
+    "topic_out": [ { "topic": "/{ns}/state/odometry", "format": "data/json" } ]
+  },
+  "source": {
+    "repo": "luoye-hcl/go1-driver",
+    "path": "unitree/go1/plugins/mt_state.py",
+    "class": "OdometryCard"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "card": "fall_alarm",
+  "robot": "unitree-go1",
+  "author": "luoye-hcl",
+  "category": "sensor",
+  "control_level": "ANY",
+  "version": "1.0.0",
+  "status": "offline-green",
+  "verified_readonly_date": "2026-07-13",
+  "topic": "state/fall_alarm",
+  "rate_hz": 10.0,
+  "payload_fields": {
+    "status": "告警等级:ok / tilted(明显倾斜)/ fallen(已翻倒)",
+    "roll_rad": "当前横滚角 (rad)",
+    "pitch_rad": "当前俯仰角 (rad)",
+    "roll_deg": "当前横滚角 (度)",
+    "pitch_deg": "当前俯仰角 (度)",
+    "tilt_warn_rad": "触发 tilted 的阈值 (rad,默认 0.6≈34°)",
+    "fall_rad": "触发 fallen 的阈值 (rad,默认 1.2≈69°)",
+    "hint": "人话提示",
+    "timestamp_ms": "采集时间戳 (ms)",
+    "control_level": "当前驱动控制等级"
+  },
+  "mcp_tool": {
+    "name": "fall_alarm",
+    "type": "sensor",
+    "multiInstance": false,
+    "readOnly": true,
+    "description": "Go1 跌倒/侧翻告警 —— 由 IMU 的 roll/pitch 幅度判定 ok/tilted/fallen + 倾角。10Hz。",
+    "inputSchema": { "type": "object", "properties": {} },
+    "topic_out": [ { "topic": "/{ns}/state/fall_alarm", "format": "data/json" } ]
+  },
+  "source": {
+    "repo": "luoye-hcl/go1-driver",
+    "path": "unitree/go1/plugins/mt_state.py",
+    "class": "FallAlarmCard"
+  }
+}
